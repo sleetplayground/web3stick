@@ -1,0 +1,7 @@
+.obsidian/workspace.json
+
+# NODE
+node_modules
+pnpm-lock.yaml
+dist
+.DS_Store

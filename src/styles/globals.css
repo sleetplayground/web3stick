@@ -1,0 +1,56 @@
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+
+  --foreground-rgb: 49, 54, 56;
+  --background-start-rgb: 249, 249, 237;
+  --background-end-rgb: 249, 249, 237;
+  --primary-color: #313638;
+  --secondary-color: #7d84b2;
+  --accent-color: #8e9dcc;
+  --light-accent: #d9dbf1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 249, 249, 237;
+    --background-start-rgb: 49, 54, 56;
+    --background-end-rgb: 49, 54, 56;
+    --primary-color: #7d84b2;
+    --secondary-color: #8e9dcc;
+    --accent-color: #d9dbf1;
+    --light-accent: #f9f9ed;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}

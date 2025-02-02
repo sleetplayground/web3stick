@@ -1,0 +1,15 @@
+.footer {
+  width: 100%;
+  padding: 1.5rem;
+  margin-top: auto;
+  text-align: center;
+  background-color: var(--primary-color);
+  color: var(--light-accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background-color: var(--secondary-color);
+    color: var(--light-accent);
+  }
+}
