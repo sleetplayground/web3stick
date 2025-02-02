@@ -1,10 +1,29 @@
 .footer {
+  min-height: 100vh;
   width: 100%;
   padding: 1.5rem;
-  margin-top: auto;
   text-align: center;
   background-color: var(--primary-color);
   color: var(--light-accent);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.socialLink {
+  margin-top: 0.5rem;
+}
+
+.socialLink a {
+  color: var(--light-accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.socialLink a:hover {
+  opacity: 0.8;
 }
 
 @media (prefers-color-scheme: dark) {

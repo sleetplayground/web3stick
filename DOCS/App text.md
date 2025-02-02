@@ -6,6 +6,10 @@ Home buttons
 - nft color playground
 - .web3stick store
 
+---
+
+home content
+
 
 
 

@@ -1,6 +1,5 @@
 import { Navigation } from './components/navigation';
-import { Footer } from './components/footer';
-import { MainContent } from './components/main-content';
+import { Home } from './pages/Home';
 import { useEffect, useState } from 'react';
 import { NearContext, Wallet } from '@/wallets/near';
 
@@ -37,10 +36,7 @@ function App() {
     <NearContext.Provider value={{ wallet, signedAccountId, networkId, onNetworkChange: handleNetworkChange }}>
       <div className="container d-flex flex-column min-vh-100">
         <Navigation />
-        <main className="mt-4 flex-grow-1">
-          <MainContent />
-        </main>
-        <Footer />
+        <Home />
       </div>
     </NearContext.Provider>
   )
