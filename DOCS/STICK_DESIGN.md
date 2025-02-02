@@ -31,3 +31,10 @@ Fonts:
 }
 
 ```
+
+Tracking and analytics
+```js
+<script data-goatcounter="https://web3stick.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+```
+
+https://web3stick.goatcounter.com/
