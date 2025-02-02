@@ -5,8 +5,8 @@ using https://github.com/vgrichina/web4-min-contract
 
 first deploy web4-min-contract
 ```sh
-near deploy web4.web3stick.testnet web4-min.wasm
-near deploy web4.web3stick.near web4-min.wasm
+near deploy web4.web3stick.testnet contracts/web4-min.wasm
+near deploy web4.web3stick.near contracts/web4-min.wasm
 ```
 
 near cli network
