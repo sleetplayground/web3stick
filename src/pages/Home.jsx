@@ -1,7 +1,41 @@
+import React from 'react';
 import styles from '@/styles/main-content.module.css';
 import { Footer } from '@/components/footer';
 
 export const Home = () => {
+  const [activeSection, setActiveSection] = React.useState(1);
+
+  React.useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionIndex = Array.from(document.querySelectorAll(`.${styles.section}`)).indexOf(entry.target);
+          setActiveSection(sectionIndex + 1);
+        }
+      });
+    }, options);
+
+    const sections = document.querySelectorAll(`.${styles.section}`);
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
+  const scrollToSection = (sectionNumber) => {
+    const sections = document.querySelectorAll(`.${styles.section}`);
+    if (sections[sectionNumber - 1]) {
+      sections[sectionNumber - 1].scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.snapContainer}>
@@ -36,10 +70,14 @@ export const Home = () => {
         </section>
 
         <div className={styles.sectionIndicator}>
-          <div className={styles.dot} data-section="1"></div>
-          <div className={styles.dot} data-section="2"></div>
-          <div className={styles.dot} data-section="3"></div>
-          <div className={styles.dot} data-section="4"></div>
+          {[1, 2, 3, 4].map((section) => (
+            <div
+              key={section}
+              className={styles.dot}
+              data-active={activeSection === section}
+              onClick={() => scrollToSection(section)}
+            />
+          ))}
         </div>
       </div>
     </div>
