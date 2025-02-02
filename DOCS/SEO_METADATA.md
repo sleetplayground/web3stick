@@ -8,7 +8,7 @@ Add the following code block between the `<head>` tags in your HTML:
 
 ```html
 <!-- Primary Meta Tags -->
-<meta name="title" content="WEB3STICK - Stick Figure NFTs on NEAR Protocol" />
+<meta name="title" content="WEB3STICK" />
 <meta name="description" content="A social experiment and playground project featuring stick figure NFTs on the NEAR blockchain. Create and customize your own web3stick account." />
 <meta name="keywords" content="web3, NFT, NEAR Protocol, stick figure, blockchain, web3stick, cryptocurrency, digital art" />
 <meta name="author" content="nonresistant.near and sleet.near" />
