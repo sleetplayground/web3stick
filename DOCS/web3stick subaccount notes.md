@@ -49,12 +49,13 @@ near call web3stick.near init '{}' --accountId web3stick.near
 ### Check Your Deposit Balance
 ```bash
 near view web3stick.testnet get_deposit '{"account_id": "YOUR_ACCOUNT.testnet"}'
-near view web3stick.near get_deposit '{"account_id": "YOUR_ACCOUNT.testnet"}'
+near view web3stick.near get_deposit '{"account_id": "YOUR_ACCOUNT.near"}'
 ```
 
 ### Make a Deposit
 ```bash
-near call YOUR_ACCOUNT.testnet deposit --accountId YOUR_ACCOUNT.testnet --deposit 0.1
+near call web3stick.testnet deposit --accountId YOUR_ACCOUNT.testnet --deposit 0.1
+near call web3stick.near deposit --accountId YOUR_ACCOUNT.near --deposit 0.1
 ```
 
 ### Create a Subaccount
@@ -85,11 +86,13 @@ near call YOUR_ACCOUNT.testnet create_subaccount '{"subaccount_id": "mysubaccoun
 near call YOUR_ACCOUNT.testnet create_subaccount '{"subaccount_id": "mysubaccount", "public_key": "YOUR_GENERATED_PUBLIC_KEY"}' --accountId YOUR_ACCOUNT.testnet
 ```
 
-After successful execution, you'll have a new account `mysubaccount.YOUR_ACCOUNT.testnet` with full access keys set up.
+After successful execution, you'll have a new account `mysubaccount.web3stick.testnet` with full access keys set up.
 
 ### Deposit and Create Subaccount in One Command
 ```bash
-near call YOUR_ACCOUNT.testnet deposit --accountId YOUR_ACCOUNT.testnet --deposit 0.1 && near call YOUR_ACCOUNT.testnet create_subaccount '{"subaccount_id": "mysubaccount", "public_key": "YOUR_GENERATED_PUBLIC_KEY"}' --accountId YOUR_ACCOUNT.testnet --gas 300000000000000
+near call web3stick.testnet deposit --accountId YOUR_ACCOUNT.testnet --deposit 0.1 && near call web3stick.testnet create_subaccount '{"subaccount_id": "mysubaccount", "public_key": "YOUR_GENERATED_PUBLIC_KEY"}' --accountId YOUR_ACCOUNT.testnet --gas 300000000000000
+
+near call web3stick.near deposit --accountId YOUR_ACCOUNT.near --deposit 0.1 && near call web3stick.near create_subaccount '{"subaccount_id": "mysubaccount", "public_key": "YOUR_GENERATED_PUBLIC_KEY"}' --accountId YOUR_ACCOUNT.near --gas 300000000000000
 ```
 
 This command combines the deposit and subaccount creation into a single line using the `&&` operator, which executes the second command only if the first one succeeds.
