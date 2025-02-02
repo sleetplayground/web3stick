@@ -4,7 +4,8 @@
 
 Home buttons
 - nft color playground
-- .web3stick community
+- .web3stick store
+
 
 
 

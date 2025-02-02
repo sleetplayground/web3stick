@@ -6,6 +6,29 @@
   min-height: calc(100vh - 200px);
 }
 
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.homeButton {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius);
+  font-family: "Knewave", serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.homeButton:hover {
+  background-color: var(--secondary-color);
+}
+
 .title {
   color: var(--primary-color);
   font-size: 2rem;

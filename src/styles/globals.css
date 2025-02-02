@@ -5,10 +5,10 @@
   --foreground-rgb: 49, 54, 56;
   --background-start-rgb: 249, 249, 237;
   --background-end-rgb: 249, 249, 237;
-  --primary-color: #313638;
-  --secondary-color: #7d84b2;
-  --accent-color: #8e9dcc;
-  --light-accent: #d9dbf1;
+  --primary-color: #DBB4DA;
+  --secondary-color: #93C8C0;
+  --accent-color: #E0DFC9;
+  --light-accent: #798BB5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -41,7 +41,7 @@ body {
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: "Schoolbell", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 a {
