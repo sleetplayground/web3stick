@@ -1,11 +1,13 @@
-# SLEET CREATE
-near account creation playground
+# WEB3STICK
+Just a stick figure, but on near
 
-
+a social experiment and playground project by nonresistant.near and sleet.near
 This is a part of the sleet web3 playground project by Nathan Renfroe & The SunShining.
 
+web3stick.near
+〇 https://web3stick.near.social/
+🔗 https://web3stick.near.page/
 
-Note: the recommend way for users to create new near accounts is with a near wallet app like meteor wallet or bitte. only use this tool if you know what you are doing!
 
 ---
 
