@@ -14,12 +14,12 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 249, 249, 237;
-    --background-start-rgb: 49, 54, 56;
-    --background-end-rgb: 49, 54, 56;
-    --primary-color: #7d84b2;
-    --secondary-color: #8e9dcc;
-    --accent-color: #d9dbf1;
-    --light-accent: #f9f9ed;
+    --background-start-rgb: 121, 139, 181;
+    --background-end-rgb: 121, 139, 181;
+    --primary-color: #DBB4DA;
+    --secondary-color: #93C8C0;
+    --accent-color: #E0DFC9;
+    --light-accent: #798BB5;
   }
 }
 

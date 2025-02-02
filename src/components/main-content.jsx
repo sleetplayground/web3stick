@@ -5,8 +5,8 @@ export const MainContent = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>WEB3STICK</h1>
       <p className={styles.subtitle}>
-        I am a stick figure,
-        you are a stick figure,
+        I am a stick figure,<br/>
+        you are a stick figure,<br/>
         we are all stick figures.
       </p>
       <div className={styles.buttonContainer}>
