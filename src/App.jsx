@@ -2,6 +2,7 @@ import { Navigation } from './components/navigation';
 import { Home } from './pages/Home';
 import { Playground } from './pages/Playground';
 import { Store } from './pages/Store';
+import { Explore } from './pages/Explore';
 import { useEffect, useState } from 'react';
 import { NearContext, Wallet } from '@/wallets/near';
 import { Routes, Route } from 'react-router-dom';
@@ -43,6 +44,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/playground" element={<Playground />} />
           <Route path="/store" element={<Store />} />
+          <Route path="/explore" element={<Explore />} />
         </Routes>
       </div>
     </NearContext.Provider>

@@ -14,6 +14,7 @@ export const Footer = () => {
         <Link to="/">HOME</Link>
         <Link to="/playground">PLAYGROUND</Link>
         <Link to="/store">STORE</Link>
+        <Link to="/explore">EXPLORE</Link>
       </div>
 
       <div className="text-uppercase">

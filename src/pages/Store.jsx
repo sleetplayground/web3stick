@@ -3,7 +3,6 @@ import styles from '@/styles/store.module.css';
 import { Footer } from '@/components/footer';
 import KeyGenerator from '@/components/KeyGenerator';
 import AccountPurchaseForm from '../components/AccountPurchaseForm';
-import SubaccountsList from '../components/SubaccountsList';
 
 export const Store = () => {
   const [activeSection, setActiveSection] = useState('');
@@ -104,7 +103,6 @@ export const Store = () => {
         )}
       </div>
 
-      <SubaccountsList />
       <Footer />
     </div>
   );

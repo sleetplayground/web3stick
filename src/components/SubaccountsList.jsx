@@ -1,22 +1,54 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styles from '../styles/subaccounts.module.css';
+import { NearContext } from '@/wallets/near';
 
 const SubaccountsList = () => {
+  const { wallet } = useContext(NearContext);
   const [accounts, setAccounts] = useState([]);
   const [filter, setFilter] = useState('');
   const [selectedNetwork, setSelectedNetwork] = useState('all');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: Implement fetching accounts from NEAR API
-    // This is a placeholder for demonstration
-    const mockAccounts = [
-      { id: 'example1.web3stick.near', network: 'mainnet' },
-      { id: 'example2.web3stick.near', network: 'mainnet' },
-      { id: 'test1.web3stick.testnet', network: 'testnet' },
-      { id: 'test2.web3stick.testnet', network: 'testnet' },
-    ];
-    setAccounts(mockAccounts);
-  }, []);
+    const fetchAccounts = async () => {
+      try {
+        let accounts = [];
+        
+        try {
+          const mainnetKeys = await wallet.getAccessKeys('web3stick.near');
+          const mainnetAccounts = mainnetKeys.map(key => ({
+            id: key.account_id,
+            network: 'mainnet'
+          }));
+          accounts = [...accounts, ...mainnetAccounts];
+        } catch (mainnetError) {
+          console.log('Error fetching mainnet accounts:', mainnetError);
+        }
+
+        try {
+          const testnetKeys = await wallet.getAccessKeys('web3stick.testnet');
+          const testnetAccounts = testnetKeys.map(key => ({
+            id: key.account_id,
+            network: 'testnet'
+          }));
+          accounts = [...accounts, ...testnetAccounts];
+        } catch (testnetError) {
+          console.log('Error fetching testnet accounts:', testnetError);
+        }
+
+        console.log('Fetched accounts:', accounts);
+        setAccounts(accounts);
+      } catch (error) {
+        console.error('Error in fetchAccounts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (wallet) {
+      fetchAccounts();
+    }
+  }, [wallet]);
 
   const filteredAccounts = accounts.filter(account => {
     const matchesFilter = account.id.toLowerCase().includes(filter.toLowerCase());
@@ -46,7 +78,7 @@ const SubaccountsList = () => {
               checked={selectedNetwork === 'all'}
               onChange={(e) => setSelectedNetwork(e.target.value)}
             />
-            All
+            All Networks
           </label>
           <label>
             <input
@@ -71,20 +103,22 @@ const SubaccountsList = () => {
         </div>
       </div>
 
-      <div className={styles.accountsList}>
-        {filteredAccounts.length > 0 ? (
-          filteredAccounts.map(account => (
-            <div key={account.id} className={styles.accountCard}>
-              <div className={styles.network}>{account.network}</div>
-              <div className={styles.accountId}>{account.id}</div>
-            </div>
-          ))
-        ) : (
-          <div className={styles.noAccounts}>
-            No accounts found
-          </div>
-        )}
-      </div>
+      {loading ? (
+        <p>Loading accounts...</p>
+      ) : filteredAccounts.length > 0 ? (
+        <ul className={styles.accountsList}>
+          {filteredAccounts.map((account) => (
+            <li key={account.id} className={styles.accountItem}>
+              <span>{account.id}</span>
+              <span className={`${styles.networkBadge} ${styles[account.network]}`}>
+                {account.network}
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No accounts found.</p>
+      )}
     </div>
   );
 };
