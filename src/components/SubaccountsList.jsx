@@ -1,9 +1,7 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/subaccounts.module.css';
-import { NearContext } from '@/wallets/near';
 
 const SubaccountsList = () => {
-  const { wallet } = useContext(NearContext);
   const [accounts, setAccounts] = useState([]);
   const [filter, setFilter] = useState('');
   const [selectedNetwork, setSelectedNetwork] = useState('all');
@@ -12,44 +10,63 @@ const SubaccountsList = () => {
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        let accounts = [];
-        
-        try {
-          const mainnetKeys = await wallet.getAccessKeys('web3stick.near');
-          const mainnetAccounts = mainnetKeys.map(key => ({
-            id: key.account_id,
-            network: 'mainnet'
-          }));
-          accounts = [...accounts, ...mainnetAccounts];
-        } catch (mainnetError) {
-          console.log('Error fetching mainnet accounts:', mainnetError);
-        }
+        const mainnetRPC = 'https://rpc.mainnet.near.org';
+        const testnetRPC = 'https://rpc.testnet.near.org';
 
-        try {
-          const testnetKeys = await wallet.getAccessKeys('web3stick.testnet');
-          const testnetAccounts = testnetKeys.map(key => ({
-            id: key.account_id,
-            network: 'testnet'
-          }));
-          accounts = [...accounts, ...testnetAccounts];
-        } catch (testnetError) {
-          console.log('Error fetching testnet accounts:', testnetError);
-        }
+        // Function to fetch all subaccounts for a network
+        const fetchAllSubaccounts = async (rpcUrl, suffix) => {
+          try {
+            const response = await fetch(rpcUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                jsonrpc: '2.0',
+                id: 'dontcare',
+                method: 'view_access_key_list',
+                params: {
+                  account_id: suffix
+                }
+              })
+            });
 
-        console.log('Fetched accounts:', accounts);
-        setAccounts(accounts);
+            const data = await response.json();
+            if (data.error) {
+              console.error(`Error fetching subaccounts for ${suffix}:`, data.error);
+              return [];
+            }
+
+            const network = rpcUrl.includes('testnet') ? 'testnet' : 'mainnet';
+            
+            // Parse the accounts from the response
+            const accountsList = data.result?.keys || [];
+            return accountsList.map(account => ({
+              id: account.public_key,
+              network,
+              created_at: new Date().toISOString() // Creation date not available from RPC
+            }));
+          } catch (error) {
+            console.error('Error fetching subaccounts:', error);
+            return [];
+          }
+        };
+
+        // Fetch accounts from both networks
+        const mainnetAccounts = await fetchAllSubaccounts(mainnetRPC, 'web3stick.near');
+        const testnetAccounts = await fetchAllSubaccounts(testnetRPC, 'web3stick.testnet');
+
+        // Combine and set accounts
+        setAccounts([...mainnetAccounts, ...testnetAccounts]);
       } catch (error) {
-        console.error('Error in fetchAccounts:', error);
+        console.error('Error fetching accounts:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (wallet) {
-      fetchAccounts();
-    }
-  }, [wallet]);
+    fetchAccounts();
+  }, []);
 
+  // Filter accounts based on search and network
   const filteredAccounts = accounts.filter(account => {
     const matchesFilter = account.id.toLowerCase().includes(filter.toLowerCase());
     const matchesNetwork = selectedNetwork === 'all' || account.network === selectedNetwork;
@@ -58,66 +75,42 @@ const SubaccountsList = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>.web3stick Subaccounts</h2>
-      
-      <div className={styles.filterContainer}>
+      <div className={styles.controls}>
         <input
           type="text"
-          placeholder="Filter accounts..."
-          className={styles.filterInput}
+          placeholder="Search accounts..."
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
+          className={styles.searchInput}
         />
-        
-        <div className={styles.networkToggle}>
-          <label>
-            <input
-              type="radio"
-              name="network"
-              value="all"
-              checked={selectedNetwork === 'all'}
-              onChange={(e) => setSelectedNetwork(e.target.value)}
-            />
-            All Networks
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="network"
-              value="mainnet"
-              checked={selectedNetwork === 'mainnet'}
-              onChange={(e) => setSelectedNetwork(e.target.value)}
-            />
-            Mainnet
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="network"
-              value="testnet"
-              checked={selectedNetwork === 'testnet'}
-              onChange={(e) => setSelectedNetwork(e.target.value)}
-            />
-            Testnet
-          </label>
-        </div>
+        <select
+          value={selectedNetwork}
+          onChange={(e) => setSelectedNetwork(e.target.value)}
+          className={styles.networkSelect}
+        >
+          <option value="all">All Networks</option>
+          <option value="mainnet">Mainnet</option>
+          <option value="testnet">Testnet</option>
+        </select>
       </div>
 
       {loading ? (
-        <p>Loading accounts...</p>
-      ) : filteredAccounts.length > 0 ? (
-        <ul className={styles.accountsList}>
-          {filteredAccounts.map((account) => (
-            <li key={account.id} className={styles.accountItem}>
-              <span>{account.id}</span>
-              <span className={`${styles.networkBadge} ${styles[account.network]}`}>
-                {account.network}
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div className={styles.loading}>Loading accounts...</div>
       ) : (
-        <p>No accounts found.</p>
+        <div className={styles.accountsList}>
+          {filteredAccounts.length > 0 ? (
+            filteredAccounts.map((account) => (
+              <div key={account.id} className={styles.accountItem}>
+                <span className={styles.accountId}>{account.id}</span>
+                <span className={styles.network}>{account.network}</span>
+              </div>
+            ))
+          ) : (
+            <div className={styles.noAccounts}>
+              No accounts found matching your criteria
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
