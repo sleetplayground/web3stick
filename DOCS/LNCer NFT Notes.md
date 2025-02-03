@@ -25,7 +25,7 @@ if you have a LNCR NFT you can add color to it here.
 
 
 
-Note: web3stick does not have a partnership with or any affiliation with learn near club. I just like their NFT collection. do not use or download others NFT's. only download your own nft. if you do not have one you can mint one at [LNCR NFT](https://learnnear.club/lncer/), forgot your NFT number, check your wallet or [Mintbase](https://www.mintbase.xyz/contract/lncernft.learnclub.near)
+Note: web3stick does not have a partnership with or any affiliation with learn near club. I just like their NFT collection. do not use or download others NFT's. only download your own nft. if you do not have one you can mint one at [LNCR NFT](https://learnnear.club/lncer/).
 
 
 
