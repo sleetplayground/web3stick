@@ -10,33 +10,9 @@ export const Canvas = ({ backgroundColor }) => {
   const [paths, setPaths] = useState([]);
   const [currentPath, setCurrentPath] = useState([]);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      canvas.width = 1080;
-      canvas.height = 1080;
-      const context = canvas.getContext('2d');
-      setCtx(context);
-    }
-  }, []);
+  const drawImageToCanvas = useCallback((image) => {
+    if (!ctx || !canvasRef.current) return;
 
-  useEffect(() => {
-    if (ctx && backgroundColor) {
-      // Clear and set background
-      ctx.fillStyle = backgroundColor;
-      ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-
-      // Redraw image if exists
-      if (currentImage) {
-        drawImageToCanvas(currentImage);
-      }
-    }
-  }, [backgroundColor, ctx, currentImage]);
-
-  const drawImageToCanvas = (image) => {
-    if (!ctx) return;
-
-    // Calculate dimensions to maintain aspect ratio
     const scale = Math.min(
       canvasRef.current.width / image.width,
       canvasRef.current.height / image.height
@@ -44,30 +20,18 @@ export const Canvas = ({ backgroundColor }) => {
     const x = (canvasRef.current.width - image.width * scale) / 2;
     const y = (canvasRef.current.height - image.height * scale) / 2;
 
-    // Set blend mode to difference for better visibility
     ctx.globalCompositeOperation = 'difference';
-    
-    // Draw image
-    ctx.drawImage(
-      image,
-      x,
-      y,
-      image.width * scale,
-      image.height * scale
-    );
-
-    // Reset blend mode
+    ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
     ctx.globalCompositeOperation = 'source-over';
-  };
+  }, [ctx]);
 
-  const drawImage = async (imageUrl) => {
+  const drawImage = useCallback(async (imageUrl) => {
     if (!ctx) return;
 
     try {
       const image = new Image();
       image.crossOrigin = 'anonymous';
       
-      // Use a CORS proxy to handle IPFS images
       const proxyUrl = imageUrl.includes('ipfs.io')
         ? `https://cors-anywhere.herokuapp.com/${imageUrl}`
         : imageUrl;
@@ -84,63 +48,33 @@ export const Canvas = ({ backgroundColor }) => {
       console.error('Error loading image:', error);
       throw error;
     }
-  };
+  }, [ctx]);
 
-  const startDrawing = useCallback((e) => {
+  useEffect(() => {
     const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setIsDrawing(true);
-    setCurrentPath([[x, y]]);
+    if (canvas) {
+      canvas.width = 1080;
+      canvas.height = 1080;
+      const context = canvas.getContext('2d');
+      setCtx(context);
+    }
   }, []);
 
-  const draw = useCallback((e) => {
-    if (!isDrawing) return;
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setCurrentPath(prev => [...prev, [x, y]]);
-
-    if (ctx) {
-      ctx.beginPath();
-      ctx.strokeStyle = 'white';
-      ctx.lineWidth = 2;
-      ctx.globalCompositeOperation = 'difference';
-      ctx.moveTo(currentPath[currentPath.length - 1][0], currentPath[currentPath.length - 1][1]);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-    }
-  }, [isDrawing, ctx, currentPath]);
-
-  const stopDrawing = useCallback(() => {
-    if (isDrawing) {
-      setPaths(prev => [...prev, currentPath]);
-      setCurrentPath([]);
-      setIsDrawing(false);
-    }
-  }, [isDrawing, currentPath]);
-
-  const undoLastPath = useCallback(() => {
-    if (paths.length === 0) return;
-
-    // Remove the last path from the paths array
-    setPaths(prev => prev.slice(0, -1));
-
-    // Redraw everything
-    if (ctx) {
-      // Clear and redraw background
+  useEffect(() => {
+    if (ctx && backgroundColor) {
+      // Clear and set background
+      ctx.globalCompositeOperation = 'source-over';
       ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
-      // Redraw image if exists
+      // Draw image if exists
       if (currentImage) {
+        ctx.globalCompositeOperation = 'difference';
         drawImageToCanvas(currentImage);
       }
 
-      // Redraw remaining paths
-      paths.slice(0, -1).forEach(path => {
+      // Draw paths
+      paths.forEach(path => {
         ctx.beginPath();
         ctx.strokeStyle = 'white';
         ctx.lineWidth = 2;
@@ -151,27 +85,92 @@ export const Canvas = ({ backgroundColor }) => {
         });
         ctx.stroke();
       });
+
+      // Reset composite operation
+      ctx.globalCompositeOperation = 'source-over';
     }
-  }, [paths, ctx, backgroundColor, currentImage]);
+  }, [backgroundColor, ctx, currentImage, paths, drawImageToCanvas]);
+
+  const undoLastPath = useCallback(() => {
+    if (paths.length > 0) {
+      setPaths(prev => prev.slice(0, -1));
+      // Redraw canvas
+      if (ctx) {
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        if (currentImage) {
+          drawImageToCanvas(currentImage);
+        }
+        // Redraw remaining paths
+        paths.slice(0, -1).forEach(path => {
+          ctx.beginPath();
+          ctx.strokeStyle = 'white';
+          ctx.lineWidth = 2;
+          ctx.globalCompositeOperation = 'difference';
+          path.forEach(([x, y], i) => {
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          });
+          ctx.stroke();
+        });
+      }
+    }
+  }, [paths, ctx, backgroundColor, currentImage, drawImageToCanvas]);
+
+  const getCanvasCoordinates = useCallback((e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY
+    };
+  }, []);
+
+  const startDrawing = useCallback((e) => {
+    const { x, y } = getCanvasCoordinates(e);
+    setIsDrawing(true);
+    setCurrentPath([[x, y]]);
+  }, [getCanvasCoordinates]);
+
+  const draw = useCallback((e) => {
+    if (!isDrawing) return;
+    const { x, y } = getCanvasCoordinates(e);
+    setCurrentPath(prev => [...prev, [x, y]]);
+
+    if (ctx) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 2;
+      ctx.globalCompositeOperation = 'difference';
+      ctx.moveTo(currentPath[currentPath.length - 1][0], currentPath[currentPath.length - 1][1]);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+  }, [isDrawing, ctx, currentPath, getCanvasCoordinates]);
+
+  const stopDrawing = useCallback(() => {
+    if (isDrawing) {
+      setPaths(prev => [...prev, currentPath]);
+      setCurrentPath([]);
+      setIsDrawing(false);
+    }
+  }, [isDrawing, currentPath]);
 
   const saveCanvasAsPNG = useCallback(() => {
-    if (!canvasRef.current) return;
-
-    // Create a temporary link element
-    const link = document.createElement('a');
-    
-    // Get the canvas data as a PNG
-    const dataUrl = canvasRef.current.toDataURL('image/png');
-    
-    // Set up the download
-    link.download = 'web3stick-creation.png';
-    link.href = dataUrl;
-    
-    // Trigger the download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }, [canvasRef]);
+    if (canvasRef.current) {
+      const link = document.createElement('a');
+      link.download = 'web3stick.png';
+      link.href = canvasRef.current.toDataURL('image/png');
+      link.click();
+    }
+  }, []);
 
   return {
     canvasElement: (
@@ -182,12 +181,16 @@ export const Canvas = ({ backgroundColor }) => {
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
+        onTouchStart={startDrawing}
+        onTouchMove={draw}
+        onTouchEnd={stopDrawing}
+        onTouchCancel={stopDrawing}
       />
     ),
     drawImage,
-    undoLastPath,
-    saveCanvasAsPNG
-  }
+    saveCanvasAsPNG,
+    undoLastPath
+  };
 };
 
 Canvas.propTypes = {
