@@ -10,7 +10,6 @@ export default function AccountPurchaseForm() {
   const [publicKey, setPublicKey] = useState('');
   const [purchaseStatus, setPurchaseStatus] = useState(null);
   const [error, setError] = useState(null);
-  const [transactionHashes, setTransactionHashes] = useState([]);
   const [depositComplete, setDepositComplete] = useState(false);
   const [depositBalance, setDepositBalance] = useState('0');
 
@@ -45,7 +44,7 @@ export default function AccountPurchaseForm() {
       const contractId = getContractId();
       
       // Deposit transaction
-      const depositResult = await wallet.callMethod({
+      await wallet.callMethod({
         contractId,
         method: 'deposit',
         args: {},
@@ -59,16 +58,11 @@ export default function AccountPurchaseForm() {
       await checkDepositBalance();
       
       // Update status based on deposit result
-      if (depositResult) {
-        setPurchaseStatus('success');
-        setError(null);
-        setDepositComplete(true);
-        
-        // Add transaction hash if available
-        if (depositResult.transaction && depositResult.transaction.hash) {
-          setTransactionHashes(prev => [...prev, depositResult.transaction.hash]);
-        }
-      }
+      setPurchaseStatus('success');
+      setError(null);
+      setDepositComplete(true);
+      
+      // Update status after successful deposit
     } catch (err) {
       console.error('Deposit error:', err);
       handleError(err);
@@ -108,10 +102,9 @@ export default function AccountPurchaseForm() {
       setError(null);
 
       const contractId = getContractId();
-      const fullAccountName = `${accountName}.${contractId}`;
       
       // Create subaccount transaction with updated parameters
-      const createResult = await wallet.callMethod({
+      await wallet.callMethod({
         contractId,
         method: 'create_subaccount',
         args: {
@@ -121,23 +114,18 @@ export default function AccountPurchaseForm() {
         gas: '300000000000000'
       });
 
-      if (createResult) {
-        setTransactionHashes(prev => [...prev, createResult.transaction?.hash]);
-        setPurchaseStatus('success');
-        setError(null);
-        
-        // Reset form after successful creation
-        setAccountName('');
-        setPublicKey('');
-        setDepositComplete(false);
-        await checkDepositBalance();
-
-        // Show success message with the full account name
-        setError(`Successfully created account: ${fullAccountName}`);
-      } else {
-        setPurchaseStatus('error');
-        setError('Transaction failed. Please try again.');
-      }
+      // Wait for a short period to ensure transaction is processed
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Update status to success and clear error
+      setPurchaseStatus('success');
+      setError(null);
+      
+      // Reset form after successful creation
+      setAccountName('');
+      setPublicKey('');
+      setDepositComplete(false);
+      await checkDepositBalance();
     } catch (err) {
       console.error('Account creation error:', err);
       handleError(err);
@@ -230,7 +218,6 @@ export default function AccountPurchaseForm() {
       <PurchaseStatus
         status={purchaseStatus}
         error={error}
-        transactionHashes={transactionHashes}
         depositBalance={depositBalance}
         signedAccountId={signedAccountId}
       />

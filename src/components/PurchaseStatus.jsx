@@ -1,13 +1,8 @@
 import PropTypes from 'prop-types';
 import styles from '../styles/purchase-status.module.css';
 
-const PurchaseStatus = ({ status, error, transactionHashes, depositBalance, signedAccountId }) => {
+const PurchaseStatus = ({ status, error, depositBalance, signedAccountId }) => {
   if (!status && !depositBalance) return null;
-
-  const getExplorerUrl = (hash) => {
-    const network = window.location.hostname.includes('testnet') ? 'testnet' : 'near';
-    return `https://explorer.${network}.near.org/transactions/${hash}`;
-  };
 
   const formatNearAmount = (amount) => {
     return (parseInt(amount) / 1e24).toFixed(2);
@@ -31,27 +26,9 @@ const PurchaseStatus = ({ status, error, transactionHashes, depositBalance, sign
       {status === 'success' && (
         <div className={styles.success}>
           <h3>🎉 Success!</h3>
-          {transactionHashes && (
-            <div className={styles.transactions}>
-              <p>View your transactions on NEAR Explorer:</p>
-              {transactionHashes.map((hash, index) => (
-                <div key={index}>
-                  <a
-                    href={getExplorerUrl(hash)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {index === 0 ? 'View Deposit Transaction' : 'View Account Creation Transaction'}
-                  </a>
-                  {index === 1 && (
-                    <p className={styles.importMessage}>
-                      ✨ Your account has been created successfully! You can now use your private key to import this account into your wallet.
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+          <p className={styles.importMessage}>
+            ✨ Your account has been created successfully! You can now use your private key to import this account into your wallet.
+          </p>
         </div>
       )}
 
@@ -68,7 +45,6 @@ const PurchaseStatus = ({ status, error, transactionHashes, depositBalance, sign
 PurchaseStatus.propTypes = {
   status: PropTypes.oneOf(['processing', 'success', 'error', null]).isRequired,
   error: PropTypes.string,
-  transactionHashes: PropTypes.arrayOf(PropTypes.string),
   depositBalance: PropTypes.string,
   signedAccountId: PropTypes.string
 };
