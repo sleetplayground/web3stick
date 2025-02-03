@@ -23,17 +23,6 @@ we are all just sticks, or stick figures. and we are all on the round ball calle
 
 ---
 
-web3stick nft
-
-
-**A note about NFT's**  
-do not use or play with others NFT's.
-
-
-
-
----
-
 
 .web3stick community
 
