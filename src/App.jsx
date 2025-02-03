@@ -1,7 +1,10 @@
 import { Navigation } from './components/navigation';
 import { Home } from './pages/Home';
+import { Playground } from './pages/Playground';
+import { Store } from './pages/Store';
 import { useEffect, useState } from 'react';
 import { NearContext, Wallet } from '@/wallets/near';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const [signedAccountId, setSignedAccountId] = useState(null);
@@ -36,7 +39,11 @@ function App() {
     <NearContext.Provider value={{ wallet, signedAccountId, networkId, onNetworkChange: handleNetworkChange }}>
       <div className="container d-flex flex-column min-vh-100">
         <Navigation />
-        <Home />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/playground" element={<Playground />} />
+          <Route path="/store" element={<Store />} />
+        </Routes>
       </div>
     </NearContext.Provider>
   )

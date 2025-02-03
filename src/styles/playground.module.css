@@ -1,0 +1,55 @@
+.playgroundContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.title {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+.canvasArea {
+  background-color: var(--background-color);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comingSoon {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.colorPicker {
+  min-width: 200px;
+}
+
+.saveButton {
+  background-color: var(--primary-color);
+  color: var(--light-accent);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+  background-color: var(--secondary-color);
+}

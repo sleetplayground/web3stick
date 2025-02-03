@@ -83,8 +83,8 @@ export const Home = () => {
             Express yourself through colors in our NFT playground and discover unique stick figure NFTs in our community store.
           </p>
           <div className={styles.buttonContainer}>
-            <button className={styles.homeButton}>EXPLORE PLAYGROUND</button>
-            <button className={styles.homeButton}>VISIT STORE</button>
+            <button className={styles.homeButton} onClick={() => window.location.href = '/playground'}>STICK PLAYGROUND</button>
+            <button className={styles.homeButton} onClick={() => window.location.href = '/store'}>.WEB3STICK.NEAR STORE</button>
           </div>
         </section>
 
