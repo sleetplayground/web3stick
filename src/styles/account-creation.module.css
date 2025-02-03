@@ -50,18 +50,34 @@
   font-weight: 500;
 }
 
-.formGroup input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--input-background);
-  color: var(--text-color);
-}
-
 .inputWrapper {
   position: relative;
   width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--input-background);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  flex-wrap: wrap;
+}
+
+.formGroup input {
+  width: auto;
+  flex: 1;
+  min-width: 120px;
+  padding: 0.75rem;
+  border: none;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.accountSuffix {
+  padding: 0.75rem 0.5rem 0.75rem 0;
+  color: var(--text-color);
+  opacity: 0.7;
+  white-space: normal;
+  word-break: break-word;
+  font-size: 0.9em;
 }
 
 .checking,

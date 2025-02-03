@@ -97,10 +97,11 @@ export const Store = () => {
               <li>Check near blocks for transaction history</li>
               <li>Contact web3stick on near social</li>
               <li>Please note we cannot help if you lose your private key or enter information incorrectly</li>
-              <li>If the deposit was successful but account creation failed, we can create an account for you</li>
+              <li>If the deposit was successful but account creation failed, we can create an account for you, or try again if the deposite shows up correctly.</li>
               <li>All transaction history is on the blockchain - the block explorer will show if transactions were successful</li>
               <li>Check web3stick.testnet or web3stick.near or your wallet address on the explorer</li>
               <li>Visit <a href="https://nearblocks.io" target="_blank" rel="noopener noreferrer">Near Blocks Mainnet</a> or <a href="https://testnet.nearblocks.io" target="_blank" rel="noopener noreferrer">Near Blocks Testnet</a></li>
+              <li>Only deposit once if you want to purchase one .web3stick.near account. refunds are not available.</li>
             </ul>
           </div>
         )}

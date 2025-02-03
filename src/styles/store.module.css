@@ -2,7 +2,13 @@
   width: 100%;
   max-width: 1200px;
   margin: 4rem auto;
-  padding: 2rem 1rem;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .storeContainer {
+    padding: 2rem 1.5rem;
+  }
 }
 
 .title {
