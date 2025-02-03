@@ -51,14 +51,14 @@ export const Home = () => {
         <section className={`${styles.section} ${styles.section2}`}>
           <div className={styles.infoBox}>
             <div className={styles.infoBoxContent}>
-              <h3 className={styles.infoTitle}>What is Web3stick?</h3>
+              <h3 className={styles.infoTitle}>What is Web3Stick?</h3>
               <p>Web3stick is a social experiment and growing community by nonresistant.near</p>
             </div>
           </div>
 
           <div className={styles.infoBox}>
             <div className={styles.infoBoxContent}>
-              <h3 className={styles.infoTitle}>What does Web3stick mean?</h3>
+              <h3 className={styles.infoTitle}>What does Web3Stick mean?</h3>
               <p>The web3 part doesn&apos;t really mean anything, just that we are on near protocol. The stick part is about who all ultimately are. We are all just sticks, or stick figures, and we are all on the round ball called earth, and we are all trying to figure out life.</p>
             </div>
           </div>
