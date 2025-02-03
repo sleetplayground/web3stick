@@ -23,11 +23,11 @@ const PurchaseStatus = ({ status, error, depositBalance, signedAccountId }) => {
         </div>
       )}
 
-      {status === 'success' && depositBalance === '100000000000000000000000' && (
+      {status === 'success' && depositBalance && (
         <div className={styles.success}>
           <h3>🎉 Deposit Successful!</h3>
           <p className={styles.importMessage}>
-            ✨ Your deposit of 0.1 NEAR has been confirmed. You can now proceed to create your .web3stick account!
+            ✨ Your deposit of {formatNearAmount(depositBalance)} NEAR has been confirmed. You can now proceed to create your .web3stick account!
           </p>
         </div>
       )}
