@@ -31,7 +31,7 @@ you can use a .web3stick.near account as your wallet address and near social han
 
 
 how to purchase
--  securely connect your near wallet (like meteor wallet, or Bitte)
+-  securely connect your near wallet (like Meteor wallet, or Bitte)
 - enter the desired account username.
 - paste the public key, use tool to create one, read key guide
 - click buy, each .web3stick.near account costs 0.1 near

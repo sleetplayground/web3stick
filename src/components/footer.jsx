@@ -11,9 +11,9 @@ export const Footer = () => {
       </div>
 
       <div className={styles.navLinks}>
-        <Link to="/">Home</Link>
-        <Link to="/playground">Playground</Link>
-        <Link to="/store">Store</Link>
+        <Link to="/">HOME</Link>
+        <Link to="/playground">PLAYGROUND</Link>
+        <Link to="/store">STORE</Link>
       </div>
 
       <div className="text-uppercase">
