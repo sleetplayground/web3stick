@@ -36,8 +36,8 @@ This smart contract enables users to create subaccounts of the master account wh
 npm run build
 
 # Deploy the contract to your account
-near deploy web3stick.testnet build/build/sleet_subaccount.wasm
-near deploy web3stick.near build/build/sleet_subaccount.wasm
+near deploy web3stick.testnet contracts/sleet_subaccount.wasm
+near deploy web3stick.near contracts/sleet_subaccount.wasm
 
 # Initialize the contract
 near call web3stick.testnet init '{}' --accountId web3stick.testnet

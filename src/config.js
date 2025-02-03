@@ -21,3 +21,7 @@ export const setNetworkId = (network) => {
   NetworkId = network;
   window.location.reload();
 };
+
+export const getContractId = () => {
+  return NetworkId === 'testnet' ? 'web3stick.testnet' : 'web3stick.near';
+};

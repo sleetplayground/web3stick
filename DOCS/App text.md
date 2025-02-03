@@ -51,3 +51,9 @@ why you would want to buy a .web3stick if you already have a near account
 - use as your near onsocial handle
 - grants you access to the web3stick community, a growing community of sticks
 - near accounts are also assets that can be used for various purpose, they can also minted and resold
+
+
+what to do in case of purchase failure
+- check near blocks for transaction history
+- contact web3stick on near social
+- but please note i can not help you if you lose your private key or if you enter any information wrong.
