@@ -21,7 +21,7 @@
 .loginButton {
   background-color: var(--accent-color);
   color: var(--light-accent);
-  border: none;
+  border: 2px solid var(--primary-color);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   text-transform: uppercase;
@@ -31,16 +31,19 @@
 .loginButton:hover {
   background-color: var(--secondary-color);
   color: var(--light-accent);
+  border-color: var(--accent-color);
 }
 
 @media (prefers-color-scheme: dark) {
   .loginButton {
     background-color: var(--primary-color);
     color: var(--light-accent);
+    border-color: var(--secondary-color);
   }
 
   .loginButton:hover {
     background-color: var(--accent-color);
+    border-color: var(--primary-color);
   }
 }
 
