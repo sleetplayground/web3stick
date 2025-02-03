@@ -1,7 +1,10 @@
 import styles from '@/styles/playground.module.css';
 import { Footer } from '@/components/footer';
+import { Canvas } from '@/components/Canvas';
+import { useState } from 'react';
 
 export const Playground = () => {
+  const [backgroundColor, setBackgroundColor] = useState('#ffffff');
   return (
     <div className={styles.playgroundContainer}>
       <h1 className={styles.title}>Stick Playground</h1>
@@ -24,12 +27,16 @@ export const Playground = () => {
         </div>
       </div>
       <div className={styles.canvasArea}>
-        {/* Canvas implementation will be added later */}
-        <p className={styles.comingSoon}>Canvas implementation coming soon...</p>
+        <Canvas backgroundColor={backgroundColor} />
       </div>
       <div className={styles.controls}>
         <div className={styles.colorPicker}>
-          {/* Color picker implementation will be added later */}
+          <input
+            type="color"
+            value={backgroundColor}
+            onChange={(e) => setBackgroundColor(e.target.value)}
+            className={styles.colorInput}
+          />
         </div>
         <button className={styles.saveButton}>Save Stick</button>
       </div>
