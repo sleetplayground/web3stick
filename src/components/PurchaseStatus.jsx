@@ -23,16 +23,26 @@ const PurchaseStatus = ({ status, error, depositBalance, signedAccountId }) => {
         </div>
       )}
 
-      {status === 'success' && depositBalance && (
+      {status === 'success' && depositBalance && parseInt(depositBalance) >= 100000000000000000000000 && (
         <div className={styles.success}>
-          <h3>🎉 Deposit Successful!</h3>
+          <h3>🎉 Ready to Create Account!</h3>
           <p className={styles.importMessage}>
-            ✨ Your deposit of {formatNearAmount(depositBalance)} NEAR has been confirmed. You can now proceed to create your .web3stick account!
+            ✨ You have sufficient deposit balance ({formatNearAmount(depositBalance)} NEAR). You can now create your .web3stick account!
           </p>
         </div>
       )}
 
-      {status === 'success' && depositBalance === '0' && (
+      {status === 'success' && depositBalance && parseInt(depositBalance) < 100000000000000000000000 && parseInt(depositBalance) > 0 && (
+        <div className={styles.success}>
+          <h3>🎉 Deposit Successful!</h3>
+          <p className={styles.importMessage}>
+            ✨ Your current deposit balance is {formatNearAmount(depositBalance)} NEAR.
+            Additional deposit needed to reach 0.1 NEAR for account creation.
+          </p>
+        </div>
+      )}
+
+      {status === 'success' && (!depositBalance || parseInt(depositBalance) === 0) && (
         <div className={styles.success}>
           <h3>🎉 Account Created Successfully!</h3>
           <p className={styles.importMessage}>
