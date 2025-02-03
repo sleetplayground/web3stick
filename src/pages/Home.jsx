@@ -80,7 +80,8 @@ export const Home = () => {
         <section className={`${styles.section} ${styles.section3}`}>
           <h2 className={styles.sectionTitle}>CREATE & COLLECT</h2>
           <p className={styles.sectionText}>
-            Express yourself through colors in our NFT playground and discover unique stick figure NFTs in our community store.
+            Create art and add color to stick figures in my playground,<br/>
+            buy a .web3stick.near account in my store!
           </p>
           <div className={styles.buttonContainer}>
             <button className={styles.homeButton} onClick={() => window.location.href = '/playground'}>STICK PLAYGROUND</button>
