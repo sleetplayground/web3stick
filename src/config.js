@@ -14,11 +14,12 @@ const evmWalletChains = {
   },
 };
 
-export let NetworkId = 'testnet';
+export let NetworkId = localStorage.getItem('networkId') || 'testnet';
 export const EVMWalletChain = evmWalletChains[NetworkId];
 
 export const setNetworkId = (network) => {
   NetworkId = network;
+  localStorage.setItem('networkId', network);
   window.location.reload();
 };
 
