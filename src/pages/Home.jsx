@@ -42,9 +42,9 @@ export const Home = () => {
         <section className={`${styles.section} ${styles.section1}`}>
           <h1 className={styles.title}>WEB3STICK</h1>
           <p className={styles.subtitle}>
-            I am a stick figure,<br/>
-            you are a stick figure,<br/>
-            we are all stick figures.
+          You are a unique stick.<br/>
+          I am a unique stick.<br/>
+          We are all unique sticks.
           </p>
         </section>
 
