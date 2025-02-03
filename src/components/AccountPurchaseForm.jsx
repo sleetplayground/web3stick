@@ -2,10 +2,10 @@ import { useState, useContext } from 'react';
 import styles from '../styles/account-creation.module.css';
 import PurchaseStatus from './PurchaseStatus';
 import { NearContext } from '@/wallets/near';
-import { getContractId, NetworkId } from '../config';
+import { getContractId } from '../config';
 
 export default function AccountPurchaseForm() {
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { wallet, signedAccountId, networkId } = useContext(NearContext);
   const [accountName, setAccountName] = useState('');
   const [publicKey, setPublicKey] = useState('');
   const [purchaseStatus, setPurchaseStatus] = useState(null);
@@ -13,7 +13,7 @@ export default function AccountPurchaseForm() {
   const [depositComplete, setDepositComplete] = useState(false);
   const [depositBalance, setDepositBalance] = useState('0');
 
-  // Check deposit balance when component mounts or account changes
+  // Check deposit balance when component mounts or network/account changes
   const checkDepositBalance = async () => {
     if (!signedAccountId) return;
     try {
@@ -168,7 +168,7 @@ export default function AccountPurchaseForm() {
               required
             />
             <span className={styles.accountSuffix}>
-              .web3stick.{NetworkId === 'testnet' ? 'testnet' : 'near'}
+              .web3stick.{networkId === 'mainnet' ? 'near' : 'testnet'}
             </span>
           </div>
         </div>
