@@ -3,6 +3,7 @@ import styles from '@/styles/store.module.css';
 import { Footer } from '@/components/footer';
 import KeyGenerator from '@/components/KeyGenerator';
 import AccountPurchaseForm from '../components/AccountPurchaseForm';
+import SubaccountsList from '../components/SubaccountsList';
 
 export const Store = () => {
   const [activeSection, setActiveSection] = useState('');
@@ -98,33 +99,15 @@ export const Store = () => {
               <li>Contact web3stick on near social</li>
               <li>Please note we cannot help if you lose your private key or enter information incorrectly</li>
               <li>If the deposit was successful but account creation failed, we can create an account for you, or try again if the deposite shows up correctly.</li>
-              <li>All transaction history is on the blockchain - the block explorer will show if transactions were successful</li>
-              <li>Check web3stick.testnet or web3stick.near or your wallet address on the explorer</li>
-              <li>Visit <a href="https://nearblocks.io" target="_blank" rel="noopener noreferrer">Near Blocks Mainnet</a> or <a href="https://testnet.nearblocks.io" target="_blank" rel="noopener noreferrer">Near Blocks Testnet</a></li>
-              <li>Only deposit once if you want to purchase one .web3stick.near account. refunds are not available.</li>
             </ul>
           </div>
         )}
       </div>
 
-      <div className={styles.dropdownSection}>
-        <div 
-          className={`${styles.dropdownHeader} ${activeSection === 'notes' ? styles.active : ''}`}
-          onClick={() => toggleSection('notes')}
-        >
-          <h3>Other Important Notes</h3>
-        </div>
-        {activeSection === 'notes' && (
-          <div className={styles.dropdownContent}>
-            <ul>
-              <li>Because anyone can do anything with their .web3stick account, make sure you get updated and accurate information from our official profile</li>
-              <li>Beware of people launching tokens with their .web3stick accounts. If we launch a .web3stick token, we will announce it on our social media, but currently have no plans to do so</li>
-              <li>Launching meme tokens can be fun - maybe a community meme token launchpad in the future</li>
-            </ul>
-          </div>
-        )}
-      </div>
+      <SubaccountsList />
       <Footer />
     </div>
   );
 };
+
+export default Store;
