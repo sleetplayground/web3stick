@@ -52,11 +52,22 @@ export default function AccountPurchaseForm() {
         deposit: '100000000000000000000000' // 0.1 NEAR
       });
 
+      // Wait for a short period to ensure transaction is processed
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Verify the deposit by checking balance
+      await checkDepositBalance();
+      
+      // Update status based on deposit result
       if (depositResult) {
-        setTransactionHashes(prev => [...prev, depositResult.transaction.hash]);
-        await checkDepositBalance(); // Verify deposit was successful
         setPurchaseStatus('success');
         setError(null);
+        setDepositComplete(true);
+        
+        // Add transaction hash if available
+        if (depositResult.transaction && depositResult.transaction.hash) {
+          setTransactionHashes(prev => [...prev, depositResult.transaction.hash]);
+        }
       }
     } catch (err) {
       console.error('Deposit error:', err);
@@ -123,12 +134,13 @@ export default function AccountPurchaseForm() {
 
         // Show success message with the full account name
         setError(`Successfully created account: ${fullAccountName}`);
+      } else {
+        setPurchaseStatus('error');
+        setError('Transaction failed. Please try again.');
       }
     } catch (err) {
       console.error('Account creation error:', err);
       handleError(err);
-    } finally {
-      setPurchaseStatus(null);
     }
   };
 

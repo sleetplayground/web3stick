@@ -33,16 +33,22 @@ const PurchaseStatus = ({ status, error, transactionHashes, depositBalance, sign
           <h3>🎉 Success!</h3>
           {transactionHashes && (
             <div className={styles.transactions}>
-              <p>View your transactions:</p>
+              <p>View your transactions on NEAR Explorer:</p>
               {transactionHashes.map((hash, index) => (
-                <a
-                  key={index}
-                  href={getExplorerUrl(hash)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {index === 0 ? 'Deposit' : 'Account Creation'} Transaction
-                </a>
+                <div key={index}>
+                  <a
+                    href={getExplorerUrl(hash)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {index === 0 ? 'View Deposit Transaction' : 'View Account Creation Transaction'}
+                  </a>
+                  {index === 1 && (
+                    <p className={styles.importMessage}>
+                      ✨ Your account has been created successfully! You can now use your private key to import this account into your wallet.
+                    </p>
+                  )}
+                </div>
               ))}
             </div>
           )}

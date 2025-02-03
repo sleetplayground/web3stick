@@ -3,8 +3,23 @@
   margin: 20px 0;
   padding: 20px;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.depositInfo {
+  background-color: var(--primary-color);
+  color: var(--light-accent);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.depositInfo p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 /* Processing State */
