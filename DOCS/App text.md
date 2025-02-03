@@ -12,11 +12,11 @@ home content
 
 You are a unique stick. I am a unique stick. We are all unique sticks.
 
-what is web3stick.near?
+what is web3stick?
 web3 stick is a social experiment and growing community by nonresistant.near
 
 what does web3stick mean?
-the web3 part doesn't really mean anything. the stick part is about who all ultimately are.
+the web3 part doesn't really mean anything, just that we are on near protocol. the stick part is about who all ultimately are.
 we are all just sticks, or stick figures. and we are all on the round ball called earth. and we are all trying to figure out life
 
 
