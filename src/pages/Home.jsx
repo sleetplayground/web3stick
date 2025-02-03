@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '@/styles/main-content.module.css';
 import { Footer } from '@/components/footer';
 
 export const Home = () => {
   const [activeSection, setActiveSection] = React.useState(1);
-  const [activeBox, setActiveBox] = useState(null);
 
   React.useEffect(() => {
     const options = {
@@ -51,27 +50,15 @@ export const Home = () => {
 
         <section className={`${styles.section} ${styles.section2}`}>
           <div className={styles.infoBox}>
-            <div 
-              className={styles.infoBoxHeader} 
-              onClick={() => setActiveBox(activeBox === 'what' ? null : 'what')}
-            >
-              <h3>What is Web3stick?</h3>
-              <span className={`${styles.arrow} ${activeBox === 'what' ? styles.arrowUp : ''}`}>▼</span>
-            </div>
-            <div className={`${styles.infoBoxContent} ${activeBox === 'what' ? styles.show : ''}`}>
+            <div className={styles.infoBoxContent}>
+              <h3 className={styles.infoTitle}>What is Web3stick?</h3>
               <p>Web3stick is a social experiment and growing community by nonresistant.near</p>
             </div>
           </div>
 
           <div className={styles.infoBox}>
-            <div 
-              className={styles.infoBoxHeader} 
-              onClick={() => setActiveBox(activeBox === 'mean' ? null : 'mean')}
-            >
-              <h3>What does Web3stick mean?</h3>
-              <span className={`${styles.arrow} ${activeBox === 'mean' ? styles.arrowUp : ''}`}>▼</span>
-            </div>
-            <div className={`${styles.infoBoxContent} ${activeBox === 'mean' ? styles.show : ''}`}>
+            <div className={styles.infoBoxContent}>
+              <h3 className={styles.infoTitle}>What does Web3stick mean?</h3>
               <p>The web3 part doesn&apos;t really mean anything, just that we are on near protocol. The stick part is about who all ultimately are. We are all just sticks, or stick figures, and we are all on the round ball called earth, and we are all trying to figure out life.</p>
             </div>
           </div>
