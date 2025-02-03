@@ -23,11 +23,21 @@ const PurchaseStatus = ({ status, error, depositBalance, signedAccountId }) => {
         </div>
       )}
 
-      {status === 'success' && (
+      {status === 'success' && depositBalance === '100000000000000000000000' && (
         <div className={styles.success}>
-          <h3>🎉 Success!</h3>
+          <h3>🎉 Deposit Successful!</h3>
           <p className={styles.importMessage}>
-            ✨ Your account has been created successfully! You can now use your private key to import this account into your wallet.
+            ✨ Your deposit of 0.1 NEAR has been confirmed. You can now proceed to create your .web3stick account!
+          </p>
+        </div>
+      )}
+
+      {status === 'success' && depositBalance === '0' && (
+        <div className={styles.success}>
+          <h3>🎉 Account Created Successfully!</h3>
+          <p className={styles.importMessage}>
+            ✨ Your .web3stick account has been created! You can now use your private key to import this account into your wallet.
+            Make sure to keep your private key safe, as it&apos;s required to access your account.
           </p>
         </div>
       )}
