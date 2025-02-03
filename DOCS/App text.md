@@ -57,3 +57,8 @@ what to do in case of purchase failure
 - check near blocks for transaction history
 - contact web3stick on near social
 - but please note i can not help you if you lose your private key or if you enter any information wrong.
+- if the deposit was successful but the account creation was unsuccessful, i can create an account for you.
+
+other notes
+- because anyone can do anything with their .web3stick account make sure you get updated and accurate information from our official profile.
+- beware of people launching tokens with their .web3stick accounts, if I launch a .web3stick token, I will announce on my social media. but currently have no plans to launch one. Launching Meme tokens can be fun.

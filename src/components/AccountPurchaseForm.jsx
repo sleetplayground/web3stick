@@ -11,9 +11,27 @@ export default function AccountPurchaseForm() {
   const [purchaseStatus, setPurchaseStatus] = useState(null);
   const [error, setError] = useState(null);
   const [transactionHashes, setTransactionHashes] = useState([]);
+  const [depositComplete, setDepositComplete] = useState(false);
+  const [depositBalance, setDepositBalance] = useState('0');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Check deposit balance when component mounts or account changes
+  const checkDepositBalance = async () => {
+    if (!signedAccountId) return;
+    try {
+      const contractId = getContractId();
+      const balance = await wallet.viewMethod({
+        contractId,
+        method: 'get_deposit',
+        args: { account_id: signedAccountId }
+      });
+      setDepositBalance(balance);
+      setDepositComplete(balance >= '100000000000000000000000'); // 0.1 NEAR
+    } catch (err) {
+      console.error('Error checking deposit balance:', err);
+    }
+  };
+
+  const handleDeposit = async () => {
     if (!signedAccountId) {
       setError('Please connect your NEAR wallet first');
       setPurchaseStatus('error');
@@ -24,80 +42,120 @@ export default function AccountPurchaseForm() {
       setPurchaseStatus('processing');
       setError(null);
       
-      // Add network check
-      try {
-        await fetch('https://rpc.testnet.near.org/status', { timeout: 5000 });
-      } catch (error) {
-        console.error('Network check failed:', error);
-        setError('Network connectivity issues detected. Please check your internet connection and try again.');
-        setPurchaseStatus('error');
-        return;
-      }
-
       const contractId = getContractId();
       
-      // Combine deposit and create_subaccount into a single transaction
-      const transactions = [
-        {
-          receiverId: contractId,
-          actions: [
-            {
-              type: 'FunctionCall',
-              params: {
-                methodName: 'deposit',
-                args: {},
-                gas: '30000000000000',
-                deposit: '100000000000000000000000' // 0.1 NEAR
-              }
-            },
-            {
-              type: 'FunctionCall',
-              params: {
-                methodName: 'create_subaccount',
-                args: {
-                  subaccount_id: accountName,
-                  public_key: publicKey
-                },
-                gas: '300000000000000',
-                deposit: '0'
-              }
-            }
-          ]
-        }
-      ];
+      // Deposit transaction
+      const depositResult = await wallet.callMethod({
+        contractId,
+        method: 'deposit',
+        args: {},
+        deposit: '100000000000000000000000' // 0.1 NEAR
+      });
 
-      // Add timeout promise
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Transaction is taking longer than expected. Please check your transaction status in NEAR Explorer.')), 30000)
-      );
-
-      const result = await Promise.race([
-        wallet.signAndSendTransactions({ transactions }),
-        timeoutPromise
-      ]);
-      
-      if (result && result[0] && result[0].transaction) {
-        setTransactionHashes([result[0].transaction.hash]);
+      if (depositResult) {
+        setTransactionHashes(prev => [...prev, depositResult.transaction.hash]);
+        await checkDepositBalance(); // Verify deposit was successful
         setPurchaseStatus('success');
-      } else {
-        throw new Error('Invalid transaction result received');  
+        setError(null);
       }
     } catch (err) {
-      console.error('Purchase error:', err);
-      if (err.message.includes('timeout') || err.message.includes('taking longer')) {
-        setError('Transaction is still processing. Please check your transaction status in NEAR Explorer.');
-      } else if (err.message.includes('network') || err.message.includes('connectivity')) {
-        setError('Network connectivity issues detected. Please check your internet connection and try again.');
+      console.error('Deposit error:', err);
+      handleError(err);
+    }
+  };
+
+  const handleCreateAccount = async () => {
+    if (!signedAccountId) {
+      setError('Please connect your NEAR wallet first');
+      setPurchaseStatus('error');
+      return;
+    }
+
+    if (!accountName || !publicKey) {
+      setError('Please fill in both account name and public key');
+      setPurchaseStatus('error');
+      return;
+    }
+
+    // Validate account name format
+    const accountNameRegex = /^[a-z0-9_-]{2,}$/;
+    if (!accountNameRegex.test(accountName)) {
+      setError('Account name can only contain lowercase letters, numbers, hyphens and underscores, and must be at least 2 characters long');
+      setPurchaseStatus('error');
+      return;
+    }
+
+    // Validate public key format
+    if (!publicKey.startsWith('ed25519:')) {
+      setError('Invalid public key format. Public key must start with "ed25519:"');
+      setPurchaseStatus('error');
+      return;
+    }
+
+    try {
+      setPurchaseStatus('processing');
+      setError(null);
+
+      const contractId = getContractId();
+      const fullAccountName = `${accountName}.${contractId}`;
+      
+      // Create subaccount transaction with updated parameters
+      const createResult = await wallet.callMethod({
+        contractId,
+        method: 'create_subaccount',
+        args: {
+          subaccount_id: accountName,
+          public_key: publicKey
+        },
+        gas: '300000000000000'
+      });
+
+      if (createResult) {
+        setTransactionHashes(prev => [...prev, createResult.transaction?.hash]);
+        setPurchaseStatus('success');
+        setError(null);
+        
+        // Reset form after successful creation
+        setAccountName('');
+        setPublicKey('');
+        setDepositComplete(false);
+        await checkDepositBalance();
+
+        // Show success message with the full account name
+        setError(`Successfully created account: ${fullAccountName}`);
+      }
+    } catch (err) {
+      console.error('Account creation error:', err);
+      handleError(err);
+    } finally {
+      setPurchaseStatus(null);
+    }
+  };
+
+  const handleError = (err) => {
+    let errorMessage = 'An error occurred. Please try again.';
+    
+    if (err.message) {
+      if (err.message.includes('insufficient deposit')) {
+        errorMessage = 'Insufficient deposit. Please make a deposit first.';
+      } else if (err.message.includes('account already exists')) {
+        errorMessage = 'This account name is already taken. Please choose another one.';
+      } else if (err.message.includes('invalid public key')) {
+        errorMessage = 'Invalid public key format. Please check and try again.';
+      } else if (err.message.includes('User rejected')) {
+        errorMessage = 'Transaction was cancelled by user.';
       } else {
-        setError(err.message || 'Failed to complete the purchase. Please try again.');
-        setPurchaseStatus('error');
+        errorMessage = err.message;
       }
     }
+    
+    setError(errorMessage);
+    setPurchaseStatus('error');
   };
 
   return (
     <div className={styles.formContainer}>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className={styles.formGroup}>
           <label htmlFor="accountName">Account Name</label>
           <div className={styles.inputWrapper}>
@@ -109,7 +167,7 @@ export default function AccountPurchaseForm() {
               placeholder="yourname"
               required
             />
-            <span style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-color)' }}>
+            <span className={styles.accountSuffix}>
               .web3stick.{NetworkId === 'testnet' ? 'testnet' : 'near'}
             </span>
           </div>
@@ -122,20 +180,47 @@ export default function AccountPurchaseForm() {
             id="publicKey"
             value={publicKey}
             onChange={(e) => setPublicKey(e.target.value)}
-            placeholder="Enter your public key"
+            placeholder="Enter your public key (ed25519:...)"
             required
           />
         </div>
 
-        <button type="submit" className={styles.actionButton} disabled={purchaseStatus === 'processing'}>
-          {purchaseStatus === 'processing' ? 'Processing...' : 'Buy Now Securely with NEAR'}
-        </button>
+        <div className={styles.buttonContainer}>
+          <button
+            type="button"
+            className={styles.actionButton}
+            onClick={handleDeposit}
+            disabled={purchaseStatus === 'processing'}
+          >
+            {purchaseStatus === 'processing' ? 'Processing...' : 'Step 1: Deposit 0.1 NEAR'}
+          </button>
+
+          <button
+            type="button"
+            className={styles.actionButton}
+            onClick={checkDepositBalance}
+            disabled={purchaseStatus === 'processing'}
+          >
+            Check Deposit
+          </button>
+
+          <button
+            type="button"
+            className={`${styles.actionButton} ${depositComplete ? styles.active : ''}`}
+            onClick={handleCreateAccount}
+            disabled={purchaseStatus === 'processing' || !depositComplete}
+          >
+            {purchaseStatus === 'processing' ? 'Processing...' : depositComplete ? 'Step 2: Create Account' : 'Deposit Required'}
+          </button>
+        </div>
       </form>
 
       <PurchaseStatus
         status={purchaseStatus}
         error={error}
         transactionHashes={transactionHashes}
+        depositBalance={depositBalance}
+        signedAccountId={signedAccountId}
       />
     </div>
   );
