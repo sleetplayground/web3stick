@@ -13,5 +13,8 @@ web3stick.near
 
 ---
 
-
+have a near account that you want to build a community around?
+<br/>
+Contact me for custom solutions. 
+<br/>
 copyright 2025 by SLEET

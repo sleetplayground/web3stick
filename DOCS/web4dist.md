@@ -1,6 +1,10 @@
 # Web4 Distribution
 
 > NOTE: web4 does not work when you have another contract deployed to your account.
+> So I am deploying to fleek instead.
+
+
+----
 
 using https://github.com/vgrichina/web4-min-contract
 
