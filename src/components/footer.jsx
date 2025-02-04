@@ -13,10 +13,10 @@ export const Footer = () => {
         {/* <Link to="/explore">EXPLORE</Link> */}
       </div>
 
-      <div className={styles.socialLink}>
-      WEB3STICK.NEAR<br/>
-      〇 <a href="https://web3stick.near.social/" target="_blank" rel="noopener noreferrer">ONSOCIAL</a>
+      <img src="/white_stick.png" alt="Web3Stick Figure" style={{ width: '50px', height: 'auto', margin: '1rem 0' }} />
 
+      <div className={styles.socialLink}>
+      <a href="https://web3stick.near.social/" target="_blank" rel="noopener noreferrer">WEB3STICK.NEAR</a>
       </div>
 
       <div className="text-uppercase">
