@@ -7,36 +7,37 @@ This document contains the recommended metadata and SEO implementation for the W
 Add the following code block between the `<head>` tags in your HTML:
 
 ```html
-<!-- Primary Meta Tags -->
-<meta name="title" content="WEB3STICK" />
-<meta name="description" content="A social experiment and playground project featuring stick figure NFTs on the NEAR blockchain. Create and customize your own web3stick account." />
-<meta name="keywords" content="web3, NFT, NEAR Protocol, stick figure, blockchain, web3stick, cryptocurrency, digital art" />
-<meta name="author" content="nonresistant.near and sleet.near" />
-<meta name="theme-color" content="#DBB4DA" />
+ <!-- Primary Meta Tags -->
+    <title>WEB3STICK</title>
+    <meta name="title" content="WEB3STICK" />
+    <meta name="description" content="A social experiment and playground project featuring stick figure NFTs on the NEAR blockchain. Create and customize your own web3stick account." />
+    <meta name="keywords" content="web3, NFT, NEAR Protocol, stick figure, blockchain, web3stick, cryptocurrency, digital art" />
+    <meta name="author" content="nonresistant.near and sleet.near" />
+    <meta name="theme-color" content="#DBB4DA" />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://web3stick.near.page/" />
-<meta property="og:title" content="WEB3STICK - Stick Figure NFTs on NEAR Protocol" />
-<meta property="og:description" content="A social experiment and playground project featuring stick figure NFTs on the NEAR blockchain. Create and customize your own web3stick account." />
-<meta property="og:image" content="/web3stick.png" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://web3stick.on-fleek.app/" />
+    <meta property="og:title" content="WEB3STICK" />
+    <meta property="og:description" content="A social experiment and playground project featuring stick figure NFTs on the NEAR blockchain. Create and customize your own web3stick account." />
+    <meta property="og:image" content="/lightpink_web3stick.png" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://web3stick.near.page/" />
-<meta property="twitter:title" content="WEB3STICK - Stick Figure NFTs on NEAR Protocol" />
-<meta property="twitter:description" content="A social experiment and playground project featuring stick figure NFTs on the NEAR blockchain. Create and customize your own web3stick account." />
-<meta property="twitter:image" content="/web3stick.png" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://web3stick.on-fleek.app/" />
+    <meta property="twitter:title" content="WEB3STICK" />
+    <meta property="twitter:description" content="A social experiment and playground project featuring stick figure NFTs on the NEAR blockchain. Create and customize your own web3stick account." />
+    <meta property="twitter:image" content="/lightpink_web3stick.png" />
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" sizes="32x32" href="/web3stick.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/web3stick.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/web3stick.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/web3stick.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/web3stick.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/web3stick.png" />
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Knewave&family=Schoolbell&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Schoolbell&display=swap" rel="stylesheet" />
 ```
 
 ## Meta Tags Explanation
