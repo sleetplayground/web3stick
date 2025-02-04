@@ -31,7 +31,7 @@ npx web4-deploy dist web4.web3stick.near --nearfs
 
 also locally with ipfs
 ```sh
-ipfs add -r web_playground
+ipfs add -r dist
 ```
 
 

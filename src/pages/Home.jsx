@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '@/styles/main-content.module.css';
 import { Footer } from '@/components/footer';
 
 export const Home = () => {
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = React.useState(1);
 
   React.useEffect(() => {
@@ -71,8 +73,8 @@ export const Home = () => {
             buy a .web3stick.near account in my store!
           </p>
           <div className={styles.buttonContainer}>
-            <button className={styles.homeButton} onClick={() => window.location.href = '/playground'}>STICK PLAYGROUND</button>
-            <button className={styles.homeButton} onClick={() => window.location.href = '/store'}>.WEB3STICK.NEAR STORE</button>
+            <button className={styles.homeButton} onClick={() => navigate('/playground')}>STICK PLAYGROUND</button>
+            <button className={styles.homeButton} onClick={() => navigate('/store')}>.WEB3STICK.NEAR STORE</button>
           </div>
         </section>
 
