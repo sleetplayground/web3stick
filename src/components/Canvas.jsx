@@ -133,12 +133,14 @@ export const Canvas = ({ backgroundColor }) => {
   }, []);
 
   const startDrawing = useCallback((e) => {
+    e.preventDefault();
     const { x, y } = getCanvasCoordinates(e);
     setIsDrawing(true);
     setCurrentPath([[x, y]]);
   }, [getCanvasCoordinates]);
 
   const draw = useCallback((e) => {
+    e.preventDefault();
     if (!isDrawing) return;
     const { x, y } = getCanvasCoordinates(e);
     setCurrentPath(prev => [...prev, [x, y]]);
