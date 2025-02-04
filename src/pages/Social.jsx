@@ -1,5 +1,5 @@
-// import React from 'react';
 import styles from '../styles/social.module.css';
+import Footer from '../components/footer';
 
 const Social = () => {
   const socialProfiles = [
@@ -21,25 +21,29 @@ const Social = () => {
   ];
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>The best community happens on chain</h1>
-      <p className={styles.subtitle}>join me on near social today</p>
+    <>
+      <div className={styles.container}>
+        <h1 className={styles.title}>the best community<br/>happens on chain</h1>
+        <p className={styles.subtitle}>join me on near social today</p>
       
-      <div className={styles.profileGrid}>
-        {socialProfiles.map((profile, index) => (
-          <a 
-            key={index} 
-            href={profile.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className={styles.profileBox}
-          >
-            <h2>{profile.name}</h2>
-            <p>{profile.description}</p>
-          </a>
-        ))}
+        <div className={styles.profileGrid}>
+          {socialProfiles.map((profile, index) => (
+            <a 
+              key={index} 
+              href={profile.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={styles.profileBox}
+            >
+              <h2>{profile.name}</h2>
+              <p>{profile.description}</p>
+              <p className={styles.profileUrl}>{profile.url}</p>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
