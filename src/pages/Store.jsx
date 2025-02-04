@@ -16,7 +16,7 @@ export const Store = () => {
       <h1 className={styles.title}>.WEB3STICK.NEAR STORE</h1>
       <div className={styles.description}>
         <p>
-          Purchase a .web3stick account and become part of my growing community.
+          Purchase a .web3stick.near sub account and become part of my growing community.
           <br/>Use your .web3stick.near account as your wallet address and near social handle.
         </p>
       </div>
@@ -71,7 +71,7 @@ export const Store = () => {
           className={`${styles.dropdownHeader} ${activeSection === 'benefits' ? styles.active : ''}`}
           onClick={() => toggleSection('benefits')}
         >
-          <h3>Why Buy a .web3stick Account?</h3>
+          <h3>Why Buy a .web3stick.near Sub-Account?</h3>
         </div>
         {activeSection === 'benefits' && (
           <div className={styles.dropdownContent}>

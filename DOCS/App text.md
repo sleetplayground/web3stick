@@ -47,7 +47,7 @@ private key generation and info
 
 
 
-why you would want to buy a .web3stick if you already have a near account
+why you would want to buy a .web3stick.near if you already have a near account
 - use as your near onsocial handle
 - grants you access to the web3stick community, a growing community of sticks
 - near accounts are also assets that can be used for various purpose, they can also minted and resold
