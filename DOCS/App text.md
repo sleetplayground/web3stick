@@ -67,3 +67,16 @@ other notes
 - because anyone can do anything with their .web3stick account make sure you get updated and accurate information from our official profile.
 - beware of people launching tokens with their .web3stick accounts, if I launch a .web3stick token, I will announce on my social media. but currently have no plans to launch one. Launching Meme tokens can be fun, maybe a community meme token launchpad in the future.
 - 
+
+
+
+---
+
+Social page
+
+The best community happens on chain
+join me on near social today
+
+- https://web3stick.near.social/ - stick - just a stick
+- https://nonresistant.near.social/ - nonresistant really - just trying to be real
+- https://sleet.near.social/ - sleet - helping you build a community around your near account, contact for custom soulutions and to see what i can do for you

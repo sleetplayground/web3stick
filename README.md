@@ -6,7 +6,7 @@ This is a part of the sleet web3 playground project by Nathan Renfroe & The SunS
 
 web3stick.near
 〇 https://web3stick.near.social/
-🔗 https://web3stick.near.page/
+🔗 https://web3stick.on-fleek.app/
 
 
 ---

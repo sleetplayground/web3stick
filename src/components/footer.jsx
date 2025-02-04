@@ -7,10 +7,11 @@ export const Footer = () => {
       
 
       <div className={styles.navLinks}>
-        <Link to="/">HOME</Link>
-        <Link to="/playground">PLAYGROUND</Link>
-        <Link to="/store">STORE</Link>
-        {/* <Link to="/explore">EXPLORE</Link> */}
+        <Link to="/">Home</Link>
+        <Link to="/playground">Playground</Link>
+        <Link to="/store">Store</Link>
+        {/* <Link to="/explore">Explore</Link> */}
+        <Link to="/social">Social</Link>
       </div>
 
       <img src="/white_stick.png" alt="Web3Stick Figure" style={{ width: '50px', height: 'auto', margin: '1rem 0' }} />
