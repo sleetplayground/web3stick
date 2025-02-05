@@ -134,6 +134,8 @@ export const Canvas = ({ backgroundColor }) => {
 
   const startDrawing = useCallback((e) => {
     e.preventDefault();
+    e.stopPropagation();
+    document.body.style.overflow = 'hidden';
     const { x, y } = getCanvasCoordinates(e);
     setIsDrawing(true);
     setCurrentPath([[x, y]]);
@@ -141,6 +143,7 @@ export const Canvas = ({ backgroundColor }) => {
 
   const draw = useCallback((e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (!isDrawing) return;
     const { x, y } = getCanvasCoordinates(e);
     setCurrentPath(prev => [...prev, [x, y]]);
@@ -159,6 +162,7 @@ export const Canvas = ({ backgroundColor }) => {
 
   const stopDrawing = useCallback(() => {
     if (isDrawing) {
+      document.body.style.overflow = '';
       setPaths(prev => [...prev, currentPath]);
       setCurrentPath([]);
       setIsDrawing(false);
