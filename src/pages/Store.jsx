@@ -97,7 +97,28 @@ export const Store = () => {
               <li>Check near blocks for transaction history</li>
               <li>Contact web3stick on near social</li>
               <li>Please note we cannot help if you lose your private key or enter information incorrectly</li>
-              <li>If the deposit was successful but account creation failed, we can create an account for you, or try again if the deposite shows up correctly.</li>
+              <li>If the deposit was successful but account creation failed, try again if your Deposit amount shows up correctly</li>
+              <li>All transaction history is on the blockchain, the block explorer will have info on if transaction was successful or not</li>
+              <li>Check for web3stick.testnet or web3stick.near or your wallet address on <a href="https://nearblocks.io" target="_blank" rel="noopener noreferrer">Near Blocks mainnet</a> or <a href="https://testnet.nearblocks.io" target="_blank" rel="noopener noreferrer">Near Blocks testnet</a></li>
+              <li>Only deposit once if you want to purchase one .web3stick.near account. Refunds are not available</li>
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <div className={styles.dropdownSection}>
+        <div 
+          className={`${styles.dropdownHeader} ${activeSection === 'community' ? styles.active : ''}`}
+          onClick={() => toggleSection('community')}
+        >
+          <h3>Important Community Notes</h3>
+        </div>
+        {activeSection === 'community' && (
+          <div className={styles.dropdownContent}>
+            <ul>
+              <li>Because anyone can do anything with their .web3stick account make sure you get updated and accurate information from our official profile</li>
+              <li>Beware of people launching tokens with their .web3stick accounts. If we launch a .web3stick token, we will announce on our social media (currently no plans)</li>
+              <li>This is an experiment by sleet.near and nonresistant.near. See contract code at our <a href='https://github.com/sleetplayground/sleet_subaccount_store_contract'>GitHub repository</a></li>
             </ul>
           </div>
         )}

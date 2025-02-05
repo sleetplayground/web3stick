@@ -66,7 +66,7 @@ what to do in case of purchase failure
 other notes
 - because anyone can do anything with their .web3stick account make sure you get updated and accurate information from our official profile.
 - beware of people launching tokens with their .web3stick accounts, if I launch a .web3stick token, I will announce on my social media. but currently have no plans to launch one. Launching Meme tokens can be fun, maybe a community meme token launchpad in the future.
-- 
+- this is a experiment by sleet.near and nonresistant.near. see cintract code at [github_sleet_subaccount_store_contract}(https://github.com/sleetplayground/sleet_subaccount_store_contract), looking to make hundreds of subaccount stores.
 
 
 
