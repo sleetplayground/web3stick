@@ -105,7 +105,7 @@ export const Playground = () => {
             <br/>
             Be sure to tag @web3stick.near or use #web3stick when sharing!</p>
         <p>
-          If you have a LNCR NFT, you can add color to it here.<br/>
+          If you have a LNCer NFT, you can add color to it here.<br/>
           Connect your wallet to load automaticly!
         </p>
       </div>
@@ -118,7 +118,7 @@ export const Playground = () => {
             onClick={handleLoadNFT}
             disabled={loading}
           >
-            {loading ? 'Loading...' : 'Load LNCR NFT'}
+            {loading ? 'Loading...' : 'Load LNCer NFT'}
           </button>
           <button 
             className={styles.actionButton}
