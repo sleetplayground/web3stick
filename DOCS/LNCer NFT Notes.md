@@ -20,7 +20,7 @@ web3stick nft
 
 you can draw and create a stick figure to use as a profile pic
 or just to create something to share [onsocial](https://onsocial.id/), be sure to tag @web3stick.near or use #web3stick
-if you have a LNCR NFT you can add color to it here.
+if you have a LNCer NFT you can add color to it here.
 
 
 

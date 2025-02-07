@@ -167,7 +167,7 @@ export const Playground = () => {
             Web3stick does not have a partnership with or any affiliation with Learn Near Club.
             <br/>I just like their NFT collection. Do not use or download others NFT&apos;s.
             <br/>Only download your own NFT.
-            <br/>If you do not have one you can mint one at <a href="https://learnnear.club/lncer/" target="_blank" rel="noopener noreferrer">LNCR NFT</a>.
+            <br/>If you do not have one you can mint one at <a href="https://learnnear.club/lncer/" target="_blank" rel="noopener noreferrer">LNCer NFT</a>.
            </p>
         </details>
         <details className={styles.infoDropdown}>
