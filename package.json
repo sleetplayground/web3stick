@@ -1,6 +1,6 @@
 {
-  "name": "sleet-account",
-  "description": "near account creation playground",
+  "name": "web3stick",
+  "description": "Just a stick figure, but on near.",
   "private": true,
   "version": "1.0.0",
   "type": "module",
