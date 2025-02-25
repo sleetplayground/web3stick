@@ -8,7 +8,7 @@ web3stick.near
 <br/>
 〇 https://web3stick.near.social/
 <br/>
-🔗 https://web3stick.on-fleek.app/
+🔗 https://web3stick.near.page/
 
 
 ---
