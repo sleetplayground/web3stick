@@ -1,1 +1,13 @@
+/* web3stick css */
 
+:root {
+  --color-one: #DBB4DA;
+  --color-two: #93C8C0;
+  --color-three: #E0DFC9;
+  --color-four: #798BB5;
+}
+
+/* body bg will be primarly white  */
+body {
+  background-color: white
+}

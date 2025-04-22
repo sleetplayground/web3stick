@@ -1,0 +1,33 @@
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+article {
+  width: 100%;
+  height: 100%;
+}
+
+section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Optional: Add some basic styling for the h1 */
+h1 {
+    font-family: "Knewave", serif;
+    font-style: normal;
+    color: var(--color-four);
+    font-size: 3rem;
+}
