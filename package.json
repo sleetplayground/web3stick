@@ -5,10 +5,12 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
+    "dev": "vite",
     "build": "parcel build"
   },
   "dependencies": {},
   "devDependencies": {
-    "parcel": "^2.14.0"
+    "parcel": "^2.14.0",
+    "vite": "^6.3.2"
   }
 }
