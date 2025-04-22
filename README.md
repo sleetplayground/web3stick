@@ -18,7 +18,8 @@ I use a mixture of vite and parcel for this project.
 bun install
 bun run start # for parcel
 bun run dev # for vite
-bun run build # with vite
+bun run build # with parcel
+bun run dist # with vite
 bun run clean
 
 # web4 deploy
