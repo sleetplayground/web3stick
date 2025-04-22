@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "parcel build",
     "dist": "vite build",
+    "clean": "rm -rf dist",
     "web4_testnet": "web4-deploy dist web4.web3stick.testnet --nearfs",
     "web4_mainnet": "web4-deploy dist web4.web3stick.near --nearfs"
   },
