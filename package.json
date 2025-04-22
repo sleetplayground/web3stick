@@ -7,11 +7,14 @@
     "start": "parcel",
     "dev": "vite",
     "build": "parcel build",
-    "dist": "vite build"
+    "dist": "vite build",
+    "web4_testnet": "web4-deploy dist web4.web3stick.testnet --nearfs",
+    "web4_mainnet": "web4-deploy dist web4.web3stick.near --nearfs"
   },
   "dependencies": {},
   "devDependencies": {
     "parcel": "^2.14.0",
-    "vite": "^6.3.2"
+    "vite": "^6.3.2",
+    "web4-deploy": "^0.8.0"
   }
 }
