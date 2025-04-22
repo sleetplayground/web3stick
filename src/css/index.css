@@ -23,12 +23,11 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  border-bottom: 3px solid var(--color-two);
 }
 
-/* Optional: Add some basic styling for the h1 */
-h1 {
-    font-family: "Knewave", serif;
-    font-style: normal;
-    color: var(--color-four);
-    font-size: 3rem;
+section:nth-child(odd) {
+  border-bottom: 3px solid var(--color-one);
 }
+

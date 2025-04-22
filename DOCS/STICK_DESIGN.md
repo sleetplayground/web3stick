@@ -2,12 +2,18 @@
 
 
 Colors
-```palette
-#DBB4DA
-#93C8C0
-#E0DFC9
-#798BB5
-```
+
+- #DBB4DA
+- #93C8C0
+- #E0DFC9
+- #798BB5
+
+
+Dark
+- #602E5F
+- #244742
+- #444327
+- #35415F
 
 
 Fonts:
