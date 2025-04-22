@@ -9,5 +9,13 @@
 
 /* body bg will be primarly white  */
 body {
-  background-color: white
+  background-color: #ffffff;
+  color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
 }
