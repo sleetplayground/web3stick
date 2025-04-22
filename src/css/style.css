@@ -1,24 +1,26 @@
 /* web3stick css */
 
 :root {
+  
   --color-one: #DBB4DA;
   --color-two: #93C8C0;
   --color-three: #E0DFC9;
   --color-four: #798BB5;
 
-  /* dark colors for font  */
-  --font-color-one: #602E5F;
-  --font-color-two: #244742;
-  --font-color-three: #444327;
-  --font-color-four: #35415F;
 }
 
 /* body bg will be primarly white  */
 body {
   background-color: #ffffff;
-  color: var(--font-color-three);
+  color: #1a1a1a;
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+}
 
 
 
@@ -31,18 +33,4 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Knewave", serif;
-}
-
-/* FONT COLOR */
-.color_one {
-  color: var(--font-color-one);
-}
-.color_two {
-  color: var(--font-color-two);
-}
-.color_three {
-  color: var(--font-color-three);
-}
-.color_four {
-  color: var(--font-color-four);
 }
