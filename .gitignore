@@ -1,4 +1,9 @@
+# mac
+.DS_Store
+
+# dev
 .parcel-cache/
 dist/
 node_modules/
 bun.lockb
+package-lock.json
