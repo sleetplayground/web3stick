@@ -6,9 +6,9 @@
   "scripts": {
     "start": "parcel",
     "dev": "parcel",
-    "build": "parcel build",
-    "dist": "parcel build",
-    "clean": "rm -rf dist",
+    "build": "npm run clean && parcel build",
+    "dist": "npm run clean && parcel build",
+    "clean": "rm -rf dist && rm -rf .parcel-cache",
     "web4_testnet": "web4-deploy dist web4.web3stick.testnet --nearfs --yes",
     "web4_mainnet": "web4-deploy dist web4.web3stick.near --nearfs"
   },
