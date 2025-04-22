@@ -13,13 +13,16 @@ web3stick.near
 ---
 
 ### DEV
-I use a mixture of vite and parcel for this project.
+redundant commands cause why not, and i use parcel.
 ```sh
 bun install
-bun run start # for parcel
-bun run dev # for vite
-bun run build # with parcel
-bun run dist # with vite
+# dev
+bun run start
+bun run dev
+# build
+bun run build
+bun run dist
+# clean
 bun run clean
 
 # web4 deploy
