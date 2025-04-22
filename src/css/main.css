@@ -3,5 +3,11 @@
 /* GOOGLE FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Knewave&family=Schoolbell&display=swap');
 
+
+/* main  */
 @import url(./style.css);
 @import url(./index.css);
+
+
+/* elemenst */
+@import url(./a.css);
