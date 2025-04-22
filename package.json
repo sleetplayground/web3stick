@@ -6,7 +6,8 @@
   "scripts": {
     "start": "parcel",
     "dev": "vite",
-    "build": "parcel build"
+    "build": "parcel build",
+    "dist": "vite build"
   },
   "dependencies": {},
   "devDependencies": {
