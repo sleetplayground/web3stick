@@ -11,8 +11,6 @@
 body {
   background-color: #ffffff;
   color: #000000;
-
-  font-family: "Schoolbell", serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +21,13 @@ body {
 }
 
 
-h1 {
+
+/* FONT */
+
+body {
+  font-family: "Schoolbell", serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-family: "Knewave", serif
 }
