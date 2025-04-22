@@ -14,6 +14,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "glob": "^11.0.1",
     "parcel": "^2.14.0",
     "vite": "^6.3.2",
     "web4-deploy": "^0.8.0"
