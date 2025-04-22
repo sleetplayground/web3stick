@@ -15,11 +15,11 @@ web3stick.near
 ### DEV
 I use a mixture of vite and parcel for this project.
 ```sh
-bun i
-bun start # for parcel
-bun dev # for vite
-bun build # with vite
-bun clean
+bun install
+bun run start # for parcel
+bun run dev # for vite
+bun run build # with vite
+bun run clean
 
 # web4 deploy
 NEAR_SIGNER_KEY=ed25519:your_key_here
