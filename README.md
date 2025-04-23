@@ -33,9 +33,6 @@ bun run web4_mainnet
 
 
 
-### What can you do
-/ todo
-
 
 ---
 
