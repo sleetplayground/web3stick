@@ -9,7 +9,7 @@ a {
     color: var(--color-one);
   }
   
-  a:after {
+  /* a:after {
     content: '';
     position: absolute;
     width: 100%;
@@ -23,4 +23,4 @@ a {
   
   a:hover:after {
     transform: scaleX(1);
-  }
+  } */

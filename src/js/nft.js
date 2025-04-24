@@ -9,6 +9,11 @@ const STORAGE_KEY = 'web3stick_nft_data';
 const STORAGE_TIMESTAMP_KEY = 'web3stick_nft_timestamp';
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
+// State management
+let currentPage = 1;
+let itemsPerPage = 12;
+let filteredNFTs = [];
+
 // Main initialization
 document.addEventListener('DOMContentLoaded', initNFTGallery);
 
@@ -17,9 +22,79 @@ async function initNFTGallery() {
     console.log('Initializing NFT gallery...');
     const nftData = await getNFTData();
     if (nftData && nftData.length > 0) {
+        filteredNFTs = nftData;
         hideLoadingSpinner();
-        renderNFTGallery(nftData);
+        setupEventListeners();
+        updateGalleryDisplay();
     }
+}
+
+// Setup event listeners for search and pagination
+function setupEventListeners() {
+    const searchInput = document.getElementById('nft-search');
+    const itemsPerPageSelect = document.getElementById('items-per-page');
+    const prevButton = document.getElementById('prev-page');
+    const nextButton = document.getElementById('next-page');
+
+    searchInput.addEventListener('input', handleSearch);
+    itemsPerPageSelect.addEventListener('change', handleItemsPerPageChange);
+    prevButton.addEventListener('click', () => changePage(-1));
+    nextButton.addEventListener('click', () => changePage(1));
+}
+
+// Handle search functionality
+function handleSearch(event) {
+    const searchTerm = event.target.value.toLowerCase();
+    const allNFTs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    
+    filteredNFTs = allNFTs.filter(nft => {
+        const title = (nft.metadata.title || '').toLowerCase();
+        const owner = (nft.owner_id || '').toLowerCase();
+        return title.includes(searchTerm) || owner.includes(searchTerm);
+    });
+
+    currentPage = 1;
+    updateGalleryDisplay();
+}
+
+// Handle items per page change
+function handleItemsPerPageChange(event) {
+    itemsPerPage = parseInt(event.target.value);
+    currentPage = 1;
+    updateGalleryDisplay();
+}
+
+// Handle page navigation
+function changePage(delta) {
+    const maxPage = Math.ceil(filteredNFTs.length / itemsPerPage);
+    const newPage = currentPage + delta;
+
+    if (newPage >= 1 && newPage <= maxPage) {
+        currentPage = newPage;
+        updateGalleryDisplay();
+    }
+}
+
+// Update gallery display with current filters and pagination
+function updateGalleryDisplay() {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentNFTs = filteredNFTs.slice(startIndex, endIndex);
+
+    renderNFTGallery(currentNFTs);
+    updatePaginationControls();
+}
+
+// Update pagination controls
+function updatePaginationControls() {
+    const maxPage = Math.ceil(filteredNFTs.length / itemsPerPage);
+    const currentPageSpan = document.getElementById('current-page');
+    const prevButton = document.getElementById('prev-page');
+    const nextButton = document.getElementById('next-page');
+
+    currentPageSpan.textContent = currentPage;
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === maxPage;
 }
 
 // Fetch NFT data with caching
