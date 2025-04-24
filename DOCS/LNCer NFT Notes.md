@@ -52,6 +52,7 @@ contract
 - https://nearblocks.io/address/lncernft.learnclub.near
 - nft_total_supply, for viewing total supply
 - nft_tokens, for quering in sets of 50 "from_index"
+- rpc https://free.rpc.fastnear.com
 
 json filds
 - token_id
