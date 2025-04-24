@@ -42,3 +42,19 @@ Learn Near Club
 Learn how to use and build on NEAR and Earn NEAR
 🔗 https://learnnear.club/
 〇 [onsocial](https://onsocial.id/onsocial.near/widget/ProfilePage?accountId=partners.learnclub.near)
+
+
+---
+
+### NFT DATA
+
+contract
+- https://nearblocks.io/address/lncernft.learnclub.near
+- nft_total_supply, for viewing total supply
+- nft_tokens, for quering in sets of 50 "from_index"
+
+json filds
+- token_id
+- owner_id
+- title
+- media - image link
