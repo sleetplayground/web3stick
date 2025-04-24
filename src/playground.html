@@ -43,7 +43,7 @@
       <h2>PLAYGROUND</h2>
       <p>add color and art to your stick figure nft</p>
       <!-- Text input search bar -->
-      <input type="text" id="searchBar" placeholder="Search NFTs...">
+      <input type="text" id="searchBar" placeholder="Enter your NFT name">
 
       <!-- Canvas for drawing or displaying NFTs -->
       <canvas id="nftCanvas"></canvas>
@@ -52,11 +52,14 @@
       <input type="color" id="colorPicker" name="colorPicker" value="#ff0000">
 
       <!-- NFT details box -->
+      <h3>NFT Details</h3>
+      <p>make sure you only play with and share your own nft</p>
       <div id="nftDetails">
-        <h3>NFT Details</h3>
         <img src="./img/web3stick.png" alt="NFT Image" id="nftImage">
-        <p>Name: <span id="nftName">Example NFT</span></p>
-        <p>Owner: <span id="nftCreator">Creator Name</span></p>
+        <div>
+          <p>Name: <span id="nftName">Example NFT</span></p>
+          <p>Owner: <span id="nftOwner">Owner Name</span></p>
+        </div>
       </div>
     </section>
 

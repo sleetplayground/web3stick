@@ -1,42 +1,51 @@
 /* Style for the search bar */
 #searchBar {
-  width: 100%;
-  max-width: 500px;
-  padding: 10px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 /* Style for the canvas */
 #nftCanvas {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  aspect-ratio: 1 / 1; /* Ensures square aspect ratio */
-  border: 1px solid #000;
-  margin-bottom: 20px;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    /* Ensures square aspect ratio */
+    border: 1px solid var(--color-two);
+    margin-bottom: 20px;
 }
 
 /* Style for the color picker */
 #colorPicker {
-  display: block;
-  margin-bottom: 20px;
+    display: block;
+    margin-bottom: 20px;
 }
+
+
 
 /* Style for the NFT details box */
 #nftDetails {
-  border: 1px solid #ddd;
-  padding: 20px;
-  background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-four);
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
 }
 
-#nftDetails h3 {
-  margin-top: 0;
-}
-
+/* Style for the image inside the NFT details box */
 #nftDetails img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin-bottom: 10px;
+    max-width: 150px;
+    /* Adjust the width as needed */
+    height: auto;
+    margin-right: 20px;
+    /* Space between image and details */
+}
+
+/* Style for the text details inside the NFT details box */
+#nftDetails div {
+    flex-grow: 1;
 }
