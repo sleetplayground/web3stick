@@ -1,5 +1,8 @@
 
 
+import { getNFTData } from './gallery_nft.js';
+
+
 // Constants
 const STORAGE_KEY = 'web3stick_nft_data';
 const searchBar = document.getElementById('searchBar');
