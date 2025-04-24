@@ -71,8 +71,7 @@ async function fetchTotalSupply() {
         if (!data.result || !data.result.result) {
             throw new Error('Invalid response format');
         }
-        const resultBuffer = Buffer.from(data.result.result, 'base64');
-        const resultString = resultBuffer.toString('utf8');
+        const resultString = atob(data.result.result);
         return parseInt(resultString);
     } catch (error) {
         console.error('Error in fetchTotalSupply:', error);
@@ -105,8 +104,7 @@ async function fetchNFTBatch(fromIndex) {
         if (!data.result || !data.result.result) {
             throw new Error('Invalid response format');
         }
-        const resultBuffer = Buffer.from(data.result.result, 'base64');
-        const resultString = resultBuffer.toString('utf8');
+        const resultString = atob(data.result.result);
         return JSON.parse(resultString);
     } catch (error) {
         console.error('Error in fetchNFTBatch:', error);
