@@ -12,7 +12,9 @@
     "web4_testnet": "web4-deploy dist web4.web3stick.testnet --nearfs --yes",
     "web4_mainnet": "web4-deploy dist web4.web3stick.near --nearfs"
   },
-  "dependencies": {},
+  "dependencies": {
+    "buffer": "^6.0.3"
+  },
   "devDependencies": {
     "parcel": "^2.14.0",
     "web4-deploy": "^0.8.0"

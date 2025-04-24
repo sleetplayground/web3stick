@@ -1,3 +1,6 @@
+// Import Buffer from 'buffer' package
+import { Buffer } from 'buffer';
+
 // Constants
 const RPC_ENDPOINT = 'https://free.rpc.fastnear.com';
 const CONTRACT_ID = 'lncernft.learnclub.near';
@@ -71,8 +74,12 @@ async function fetchTotalSupply() {
         if (!data.result || !data.result.result) {
             throw new Error('Invalid response format');
         }
-        const resultString = Buffer.from(data.result.result, 'base64').toString()
-        return parseInt(resultString);
+        const resultString = Buffer.from(data.result.result).toString('utf8');
+        const parsedValue = parseInt(resultString.replace(/"/g, ''));
+        if (isNaN(parsedValue)) {
+            throw new Error('Failed to parse total supply value');
+        }
+        return parsedValue;
     } catch (error) {
         console.error('Error in fetchTotalSupply:', error);
         throw error;
@@ -104,7 +111,7 @@ async function fetchNFTBatch(fromIndex) {
         if (!data.result || !data.result.result) {
             throw new Error('Invalid response format');
         }
-        const resultString = Buffer.from(data.result.result, 'base64').toString()
+        const resultString = Buffer.from(data.result.result, 'base64').toString('utf8');
         return JSON.parse(resultString);
     } catch (error) {
         console.error('Error in fetchNFTBatch:', error);
