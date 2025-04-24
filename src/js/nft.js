@@ -165,13 +165,15 @@ function createNFTCard(nft) {
 
     const image = document.createElement('img');
     image.className = 'nft-image';
-    image.alt = nft.title || 'NFT Image';
+    image.alt = nft.metadata.title || 'NFT Image';
     
     // Lazy loading with IntersectionObserver
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                image.src = nft.media;
+                // Clean up the media URL by removing backticks and extra spaces
+                const cleanMediaUrl = nft.metadata.media.replace(/[\s`]/g, '');
+                image.src = cleanMediaUrl;
                 image.onload = () => image.classList.add('loaded');
                 observer.unobserve(entry.target);
             }
@@ -183,8 +185,9 @@ function createNFTCard(nft) {
 
     const info = document.createElement('div');
     info.className = 'nft-info';
+
     info.innerHTML = `
-        <h3 class="nft-title">${nft.title || 'Untitled'}</h3>
+        <h3 class="nft-title">${nft.metadata.title || 'Untitled'}</h3>
         <p class="nft-owner">${nft.owner_id}</p>
         <p class="nft-token-id">#${nft.token_id}</p>
     `;
