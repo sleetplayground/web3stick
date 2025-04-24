@@ -189,7 +189,6 @@ function createNFTCard(nft) {
     info.innerHTML = `
         <h3 class="nft-title">${nft.metadata.title || 'Untitled'}</h3>
         <p class="nft-owner">${nft.owner_id}</p>
-        <p class="nft-token-id">#${nft.token_id}</p>
     `;
 
     card.appendChild(imageContainer);
