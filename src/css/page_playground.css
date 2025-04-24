@@ -1,0 +1,42 @@
+/* Style for the search bar */
+#searchBar {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+/* Style for the canvas */
+#nftCanvas {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  aspect-ratio: 1 / 1; /* Ensures square aspect ratio */
+  border: 1px solid #000;
+  margin-bottom: 20px;
+}
+
+/* Style for the color picker */
+#colorPicker {
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* Style for the NFT details box */
+#nftDetails {
+  border: 1px solid #ddd;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+#nftDetails h3 {
+  margin-top: 0;
+}
+
+#nftDetails img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
