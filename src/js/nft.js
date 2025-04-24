@@ -49,48 +49,69 @@ async function getNFTData() {
 
 // Fetch total supply of NFTs
 async function fetchTotalSupply() {
-    const response = await fetch(RPC_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            jsonrpc: '2.0',
-            id: 'dontcare',
-            method: 'query',
-            params: {
-                request_type: 'call_function',
-                finality: 'final',
-                account_id: CONTRACT_ID,
-                method_name: 'nft_total_supply',
-                args_base64: btoa('{}')
-            }
-        })
-    });
+    try {
+        const response = await fetch(RPC_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                jsonrpc: '2.0',
+                id: 'dontcare',
+                method: 'query',
+                params: {
+                    request_type: 'call_function',
+                    finality: 'final',
+                    account_id: CONTRACT_ID,
+                    method_name: 'nft_total_supply',
+                    args_base64: Buffer.from('{}').toString('base64')
+                }
+            })
+        });
 
-    const data = await response.json();
-    return parseInt(atob(data.result.result));
+        const data = await response.json();
+        if (!data.result || !data.result.result) {
+            throw new Error('Invalid response format');
+        }
+        const resultBuffer = Buffer.from(data.result.result, 'base64');
+        const resultString = resultBuffer.toString('utf8');
+        return parseInt(resultString);
+    } catch (error) {
+        console.error('Error in fetchTotalSupply:', error);
+        throw error;
+    }
 }
 
 // Fetch a batch of NFTs
 async function fetchNFTBatch(fromIndex) {
-    const response = await fetch(RPC_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            jsonrpc: '2.0',
-            id: 'dontcare',
-            method: 'query',
-            params: {
-                request_type: 'call_function',
-                finality: 'final',
-                account_id: CONTRACT_ID,
-                method_name: 'nft_tokens',
-                args_base64: btoa(JSON.stringify({ from_index: fromIndex.toString() }))
-            }
-        })
-    });
+    try {
+        const args = JSON.stringify({ from_index: fromIndex.toString() });
+        const response = await fetch(RPC_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                jsonrpc: '2.0',
+                id: 'dontcare',
+                method: 'query',
+                params: {
+                    request_type: 'call_function',
+                    finality: 'final',
+                    account_id: CONTRACT_ID,
+                    method_name: 'nft_tokens',
+                    args_base64: Buffer.from(args).toString('base64')
+                }
+            })
+        });
 
-    const data = await response.json();
-    return JSON.parse(atob(data.result.result));
+        const data = await response.json();
+        if (!data.result || !data.result.result) {
+            throw new Error('Invalid response format');
+        }
+        const resultBuffer = Buffer.from(data.result.result, 'base64');
+        const resultString = resultBuffer.toString('utf8');
+        return JSON.parse(resultString);
+    } catch (error) {
+        console.error('Error in fetchNFTBatch:', error);
+        throw error;
+    }
 }
 
 // Cache management functions
