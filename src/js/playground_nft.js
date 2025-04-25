@@ -130,6 +130,46 @@ async function loadNFT(nft) {
     
     // Load NFT image
     const cleanMediaUrl = nft.metadata.media.replace(/[\s`]/g, '');
+    
+    // Create a new image object for loading
+    const img = new Image();
+    img.crossOrigin = 'anonymous'; // Enable CORS for the image
+    
+    // Handle image loading with promise
+    await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => reject(new Error('Failed to load NFT image'));
+        img.src = cleanMediaUrl;
+    }).catch(error => {
+        console.error('Error loading NFT image:', error);
+        return; // Exit if image fails to load
+    });
+    
+    // Clear canvas and reset state
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = colorPicker.value;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Calculate dimensions to maintain aspect ratio
+    const scale = Math.min(
+        canvas.width / img.width,
+        canvas.height / img.height
+    );
+    const x = (canvas.width - img.width * scale) / 2;
+    const y = (canvas.height - img.height * scale) / 2;
+    
+    // Draw image on canvas
+    ctx.drawImage(
+        img,
+        x, y,
+        img.width * scale,
+        img.height * scale
+    );
+    
+    // Restore blend mode
+    ctx.globalCompositeOperation = 'difference';
+    
+    // Update display image
     nftImage.src = cleanMediaUrl;
     
     // Clear suggestions
@@ -140,6 +180,7 @@ async function loadNFT(nft) {
     
     // Clear search bar
     searchBar.value = '';
+
 }
 
 // Event Listeners
