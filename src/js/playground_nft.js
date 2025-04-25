@@ -126,7 +126,7 @@ async function showSuggestions(searchText) {
 async function loadNFT(nft) {
     // Update NFT details
     nftNameSpan.textContent = nft.metadata.title;
-    nftOwnerSpan.textContent = nft.owner;
+    nftOwnerSpan.textContent = nft.owner_id;
     
     // Load NFT image
     const cleanMediaUrl = nft.metadata.media.replace(/[\s`]/g, '');
