@@ -1,5 +1,6 @@
 // Constants
 const STORAGE_KEY = 'web3stick_nft_data';
+const EDITED_NFT_KEY = 'web3stick_edited_nft';
 
 // DOM Elements
 const searchBar = document.getElementById('searchBar');
@@ -11,8 +12,11 @@ const nftNameSpan = document.getElementById('nftName');
 const nftOwnerSpan = document.getElementById('nftOwner');
 const nftImage = document.getElementById('nftImage');
 
+console.log('Initializing NFT playground components...');
+
 // Canvas Setup
 function setupCanvas() {
+    console.log('Setting up canvas...');
     // Set canvas size for high quality
     const size = 1000;
     canvas.width = size;
@@ -21,9 +25,11 @@ function setupCanvas() {
     // Set initial background
     ctx.fillStyle = colorPicker.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    console.log('Canvas initialized with color:', colorPicker.value);
     
     // Set blend mode
     ctx.globalCompositeOperation = 'difference';
+    console.log('Canvas setup complete');
 }
 
 // Drawing state
@@ -35,6 +41,7 @@ let lastY = 0;
 function startDrawing(e) {
     isDrawing = true;
     [lastX, lastY] = getCanvasCoordinates(e);
+    console.log('Started drawing at coordinates:', { x: lastX, y: lastY });
 }
 
 function draw(e) {
@@ -51,10 +58,14 @@ function draw(e) {
     ctx.stroke();
     
     [lastX, lastY] = [currentX, currentY];
+    console.log('Drawing line to:', { x: currentX, y: currentY });
 }
 
 function stopDrawing() {
-    isDrawing = false;
+    if (isDrawing) {
+        console.log('Stopped drawing');
+        isDrawing = false;
+    }
 }
 
 function getCanvasCoordinates(e) {
@@ -70,11 +81,14 @@ function getCanvasCoordinates(e) {
 
 // NFT Search and Display
 async function getNFTData() {
+    console.log('Fetching NFT data from storage...');
     try {
         const cachedData = localStorage.getItem(STORAGE_KEY);
         if (cachedData) {
+            console.log('Found cached NFT data');
             return JSON.parse(cachedData);
         }
+        console.log('No cached NFT data found');
         return [];
     } catch (error) {
         console.error('Error fetching NFT data:', error);
@@ -83,8 +97,10 @@ async function getNFTData() {
 }
 
 function createSuggestionsContainer() {
+    console.log('Creating suggestions container...');
     let container = document.querySelector('.suggestions-container');
     if (!container) {
+        console.log('No existing container found, creating new one');
         container = document.createElement('div');
         container.className = 'suggestions-container';
         searchBar.parentNode.appendChild(container);
@@ -93,10 +109,12 @@ function createSuggestionsContainer() {
 }
 
 async function showSuggestions(searchText) {
+    console.log('Showing suggestions for search text:', searchText);
     const container = createSuggestionsContainer();
     container.innerHTML = '';
     
     if (!searchText) {
+        console.log('No search text provided, hiding suggestions');
         container.style.display = 'none';
         return;
     }
@@ -186,8 +204,30 @@ async function loadNFT(nft) {
 
 }
 
+// Save canvas state
+function saveCanvasState() {
+    console.log('Saving canvas state...');
+    try {
+        const currentNFT = {
+            image: canvas.toDataURL(),
+            name: nftNameSpan.textContent,
+            owner: nftOwnerSpan.textContent,
+            timestamp: new Date().toISOString()
+        };
+        localStorage.setItem(EDITED_NFT_KEY, JSON.stringify(currentNFT));
+        console.log('Canvas state saved successfully');
+        alert('NFT state saved successfully!');
+    } catch (error) {
+        console.error('Error saving canvas state:', error);
+        alert('Failed to save NFT state');
+    }
+}
+
 // Event Listeners
-window.addEventListener('load', setupCanvas);
+window.addEventListener('load', () => {
+    console.log('Window loaded, initializing components...');
+    setupCanvas();
+});
 
 // Canvas drawing events
 canvas.addEventListener('mousedown', startDrawing);
@@ -206,13 +246,18 @@ canvas.addEventListener('touchmove', (e) => {
 });
 canvas.addEventListener('touchend', stopDrawing);
 
+// Save button event
+saveButton.addEventListener('click', saveCanvasState);
+
 // Store original image data
 let originalImageData = null;
 
 // Color picker event
 colorPicker.addEventListener('input', (e) => {
+    console.log('Color changed to:', e.target.value);
     // Store current canvas state if not already stored
     if (!originalImageData) {
+        console.log('Storing original canvas state');
         originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     }
     
