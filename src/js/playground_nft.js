@@ -124,6 +124,9 @@ async function showSuggestions(searchText) {
 }
 
 async function loadNFT(nft) {
+    // Reset original image data
+    originalImageData = null;
+    
     // Update NFT details
     nftNameSpan.textContent = nft.metadata.title;
     nftOwnerSpan.textContent = nft.owner_id;
@@ -203,23 +206,37 @@ canvas.addEventListener('touchmove', (e) => {
 });
 canvas.addEventListener('touchend', stopDrawing);
 
+// Store original image data
+let originalImageData = null;
+
 // Color picker event
 colorPicker.addEventListener('input', (e) => {
-    // Store the current canvas content
-    const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = canvas.width;
-    tempCanvas.height = canvas.height;
-    const tempCtx = tempCanvas.getContext('2d');
-    tempCtx.drawImage(canvas, 0, 0);
+    // Store current canvas state if not already stored
+    if (!originalImageData) {
+        originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    }
     
-    // Clear and fill with new background color
+    // Reset composite operation to default
     ctx.globalCompositeOperation = 'source-over';
+    
+    // Clear canvas and set new background
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = e.target.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Restore the content with difference blend mode
+    // Set blend mode for drawing
     ctx.globalCompositeOperation = 'difference';
-    ctx.drawImage(tempCanvas, 0, 0);
+    
+    // Draw the original content back if it exists
+    if (originalImageData) {
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.putImageData(originalImageData, 0, 0);
+        
+        ctx.drawImage(tempCanvas, 0, 0);
+    }
 });
 
 // Search bar events
