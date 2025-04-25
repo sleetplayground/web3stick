@@ -205,10 +205,21 @@ canvas.addEventListener('touchend', stopDrawing);
 
 // Color picker event
 colorPicker.addEventListener('input', (e) => {
+    // Store the current canvas content
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = canvas.width;
+    tempCanvas.height = canvas.height;
+    const tempCtx = tempCanvas.getContext('2d');
+    tempCtx.drawImage(canvas, 0, 0);
+    
+    // Clear and fill with new background color
     ctx.globalCompositeOperation = 'source-over';
     ctx.fillStyle = e.target.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Restore the content with difference blend mode
     ctx.globalCompositeOperation = 'difference';
+    ctx.drawImage(tempCanvas, 0, 0);
 });
 
 // Search bar events
