@@ -208,18 +208,37 @@ async function loadNFT(nft) {
 function saveCanvasState() {
     console.log('Saving canvas state...');
     try {
+        // Create a download link
+        const link = document.createElement('a');
+        
+        // Get the canvas data as PNG
+        const imageData = canvas.toDataURL('image/png');
+        link.href = imageData;
+        
+        // Generate filename with NFT name and timestamp
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const filename = `${nftNameSpan.textContent || 'nft'}_${timestamp}.png`;
+        link.download = filename;
+        
+        // Save to localStorage for reference
         const currentNFT = {
-            image: canvas.toDataURL(),
+            image: imageData,
             name: nftNameSpan.textContent,
             owner: nftOwnerSpan.textContent,
-            timestamp: new Date().toISOString()
+            timestamp: timestamp
         };
         localStorage.setItem(EDITED_NFT_KEY, JSON.stringify(currentNFT));
-        console.log('Canvas state saved successfully');
-        alert('NFT state saved successfully!');
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        console.log('Canvas saved as PNG successfully');
+        alert('NFT saved as PNG successfully!');
     } catch (error) {
         console.error('Error saving canvas state:', error);
-        alert('Failed to save NFT state');
+        alert('Failed to save NFT');
     }
 }
 
