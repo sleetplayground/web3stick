@@ -145,10 +145,13 @@ async function loadNFT(nft) {
         return; // Exit if image fails to load
     });
     
-    // Clear canvas and reset state
+    // Clear canvas and set blend mode
     ctx.globalCompositeOperation = 'source-over';
     ctx.fillStyle = colorPicker.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Set blend mode before drawing image
+    ctx.globalCompositeOperation = 'difference';
     
     // Calculate dimensions to maintain aspect ratio
     const scale = Math.min(
@@ -158,16 +161,13 @@ async function loadNFT(nft) {
     const x = (canvas.width - img.width * scale) / 2;
     const y = (canvas.height - img.height * scale) / 2;
     
-    // Draw image on canvas
+    // Draw image on canvas with blend mode applied
     ctx.drawImage(
         img,
         x, y,
         img.width * scale,
         img.height * scale
     );
-    
-    // Restore blend mode
-    ctx.globalCompositeOperation = 'difference';
     
     // Update display image
     nftImage.src = cleanMediaUrl;
