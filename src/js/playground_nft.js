@@ -113,7 +113,7 @@ async function showSuggestions(searchText) {
             div.className = 'suggestion-item';
             div.innerHTML = `
                 ${nft.metadata.title}
-                <small>${nft.owner}</small>
+                <small>${nft.owner_id}</small>
             `;
             div.onclick = () => loadNFT(nft);
             container.appendChild(div);
