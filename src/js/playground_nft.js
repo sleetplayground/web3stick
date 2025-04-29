@@ -336,9 +336,13 @@ function checkMobileDevice() {
         colorPicker.style.display = 'none';
         saveButton.style.display = 'none';
 
-        const mobileMessage = document.createElement('p');
-        mobileMessage.textContent = 'ℹ️ Canvas Feature not supported on mobile ℹ️';
-        document.querySelector('section').appendChild(mobileMessage);
+        const existingMessage = document.getElementById('mobileMessage');
+        if (!existingMessage) {
+            const mobileMessage = document.createElement('p');
+            mobileMessage.id = 'mobileMessage';
+            mobileMessage.textContent = 'ℹ️ Canvas Feature not supported on mobile ℹ️';
+            document.querySelector('section').appendChild(mobileMessage);
+        }
     }
 }
 
