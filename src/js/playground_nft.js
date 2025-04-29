@@ -326,3 +326,21 @@ document.addEventListener('click', (e) => {
         }
     }
 });
+
+
+function checkMobileDevice() {
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+        canvas.style.display = 'none';
+        searchBar.style.display = 'none';
+        colorPicker.style.display = 'none';
+        saveButton.style.display = 'none';
+
+        const mobileMessage = document.createElement('p');
+        mobileMessage.textContent = 'ℹ️ Canvas Feature not supported on mobile ℹ️';
+        document.querySelector('section').appendChild(mobileMessage);
+    }
+}
+
+window.addEventListener('load', checkMobileDevice);
+window.addEventListener('resize', checkMobileDevice);
