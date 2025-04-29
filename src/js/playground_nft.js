@@ -82,7 +82,7 @@ function getCanvasCoordinates(e) {
 }
 
 // NFT Search and Display
-async function getNFTData() {
+async function fetchNFTData() {
     console.log('Fetching NFT data from storage...');
     try {
         const cachedData = localStorage.getItem(STORAGE_KEY);
