@@ -1,5 +1,7 @@
+// Import NFT data service
+import { getNFTData } from './nft_data_service';
+
 // Constants
-const STORAGE_KEY = 'web3stick_nft_data';
 const EDITED_NFT_KEY = 'web3stick_edited_nft';
 
 // DOM Elements
@@ -243,9 +245,18 @@ function saveCanvasState() {
 }
 
 // Event Listeners
-window.addEventListener('load', () => {
+// Initialize components and load NFT data
+window.addEventListener('load', async () => {
     console.log('Window loaded, initializing components...');
     setupCanvas();
+    
+    // Load NFT data on page load
+    try {
+        await getNFTData();
+        console.log('NFT data loaded successfully');
+    } catch (error) {
+        console.error('Error loading NFT data:', error);
+    }
 });
 
 // Canvas drawing events
