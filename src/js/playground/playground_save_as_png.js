@@ -28,12 +28,22 @@ document.addEventListener('DOMContentLoaded', function() {
             // Draw the SVG on canvas
             ctx.drawImage(svgImage, x, y, svg.clientWidth * scale, svg.clientHeight * scale);
 
-            // Convert canvas to PNG and trigger download
-            const pngData = canvas.toDataURL('image/png');
-            const downloadLink = document.createElement('a');
-            downloadLink.download = 'web3stick.png';
-            downloadLink.href = pngData;
-            downloadLink.click();
+            // Ensure the image element is drawn
+            const imageElement = svg.querySelector('image');
+            if (imageElement) {
+                const img = new Image();
+                img.src = imageElement.getAttribute('href');
+                img.onload = function() {
+                    ctx.drawImage(img, x, y, svg.clientWidth * scale, svg.clientHeight * scale);
+
+                    // Convert canvas to PNG and trigger download
+                    const pngData = canvas.toDataURL('image/png');
+                    const downloadLink = document.createElement('a');
+                    downloadLink.download = 'web3stick.png';
+                    downloadLink.href = pngData;
+                    downloadLink.click();
+                };
+            }
         };
     });
 });
