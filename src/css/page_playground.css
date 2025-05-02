@@ -75,13 +75,49 @@
 
 
 /* Style for the color picker */
-#colorPicker {
+#color_picker {
     display: block;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    width: 100px;
+    height: 50px;
+    padding: 5px;
+    border: 2px solid var(--color-four);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 
+#color_picker:hover {
+    transform: scale(1.05);
+}
 
+/* Style for save buttons */
+#save_as_svg,
+#save_as_png {
+    display: flex;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: var(--color-four);
+    color: var(--color-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+#save_as_svg:hover,
+#save_as_png:hover {
+    background-color: var(--color-two);
+    transform: translateY(-2px);
+}
+
+#save_as_svg:active,
+#save_as_png:active {
+    transform: translateY(0);
+}
 
 .plaground_SVG {
     width: 500px;
@@ -89,3 +125,13 @@
     max-width: 90vw;
     border: 2px solid var(--color-four);
 }
+
+
+footer {
+    margin-top: 2rem;
+    border-top: 1px solid var(--color-four);
+}
+
+
+
+
