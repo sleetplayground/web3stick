@@ -72,18 +72,7 @@
 
 
 
-/* Style for the canvas */
-#nftCanvas {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    /* Ensures square aspect ratio */
-    border: 1px solid var(--color-two);
-    margin-bottom: 20px;
-    background-color: white;
 
-}
 
 /* Style for the color picker */
 #colorPicker {
@@ -95,28 +84,3 @@
 
 
 
-
-
-/* Style for the NFT details box */
-#nftDetails {
-    display: flex;
-    align-items: center;
-    border: 1px solid var(--color-four);
-    padding: 20px;
-    width: 90%;
-    max-width: 500px;
-}
-
-/* Style for the image inside the NFT details box */
-#nftDetails img {
-    max-width: 150px;
-    /* Adjust the width as needed */
-    height: auto;
-    margin-right: 20px;
-    /* Space between image and details */
-}
-
-/* Style for the text details inside the NFT details box */
-#nftDetails div {
-    flex-grow: 1;
-}
