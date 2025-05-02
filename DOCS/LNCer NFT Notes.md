@@ -53,3 +53,31 @@ json filds
 - owner_id
 - title
 - media - image link
+
+```
+{
+    "token_id": "lncer.near_bafkreihw66c7l5uwgpn3rki6fgsmety4nfqaclf7eugrn3rw22sb7v672a",
+    "owner_id": "lncer.near",
+    "metadata": {
+      "title": "LNCer #1",
+      "description": "LNCer",
+      "media": "https://bafkreihw66c7l5uwgpn3rki6fgsmety4nfqaclf7eugrn3rw22sb7v672a.ipfs.nftstorage.link/",
+      "media_hash": null,
+      "copies": 1,
+      "issued_at": null,
+      "expires_at": null,
+      "starts_at": null,
+      "updated_at": null,
+      "extra": null,
+      "reference": null,
+      "reference_hash": null
+    },
+    "approved_account_ids": {},
+    "royalty": {
+      "didierbashev.near": 100,
+      "learnclub.near": 200,
+      "lncer.near": 100,
+      "coldy.near": 100
+    }
+```
+
