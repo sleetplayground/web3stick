@@ -26,12 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const y = (canvas.height - svg.clientHeight * scale) / 2;
             
             // Draw the SVG on canvas
+            ctx.globalCompositeOperation = 'difference';
             ctx.drawImage(svgImage, x, y, svg.clientWidth * scale, svg.clientHeight * scale);
 
             // Ensure the image element is drawn
             const imageElement = svg.querySelector('image');
             if (imageElement) {
                 const img = new Image();
+                img.crossOrigin = 'anonymous';
                 img.src = imageElement.getAttribute('href');
                 img.onload = function() {
                     ctx.drawImage(img, x, y, svg.clientWidth * scale, svg.clientHeight * scale);
