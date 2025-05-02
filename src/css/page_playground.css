@@ -85,6 +85,7 @@
 
 .plaground_SVG {
     width: 500px;
+    /* height: 500px; */
     max-width: 90vw;
     border: 2px solid var(--color-four);
 }
