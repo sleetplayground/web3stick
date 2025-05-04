@@ -3,11 +3,22 @@ import { getNFTData } from '../nft_data_service';
 
 // Initialize NFT data and search functionality
 document.addEventListener('DOMContentLoaded', async function() {
-    // Initialize NFT data
-    await initNFTData();
-    
-    // Set up search functionality
-    setupSearch();
+    // Show loading screen
+    const loadingScreen = document.querySelector('.loading_screen');
+    const loadingStatus = document.querySelector('.loading_screen_status_p');
+    loadingScreen.style.display = 'flex';
+    loadingStatus.textContent = 'Loading NFT data...';
+
+    try {
+        // Initialize NFT data
+        await initNFTData();
+        
+        // Set up search functionality
+        setupSearch();
+    } finally {
+        // Hide loading screen regardless of success or failure
+        loadingScreen.style.display = 'none';
+    }
 });
 
 // Initialize NFT data
@@ -16,6 +27,9 @@ async function initNFTData() {
         await getNFTData(); // This will fetch and cache the NFT data
     } catch (error) {
         console.error('Error initializing NFT data:', error);
+        const loadingStatus = document.querySelector('.loading_screen_status_p');
+        loadingStatus.textContent = 'Error loading NFT data. Please refresh the page.';
+        throw error; // Re-throw to be caught by the main try-catch
     }
 }
 
