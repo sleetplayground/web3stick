@@ -178,14 +178,13 @@ article {
   100% { transform: rotate(360deg); }
 }
 
+
+
 /* NFT Description Styles */
 .nft-description {
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .nft-description h2 {
@@ -193,35 +192,10 @@ article {
   margin-bottom: 1.5rem;
 }
 
-.nft-description h3 {
-  color: var(--color-two);
-  margin: 1.5rem 0 1rem;
-}
-
 .nft-description p {
   font-size: 0.8em;
   line-height: 1.6;
   margin-bottom: 1rem;
-}
-
-.participation-info ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 1rem 0;
-}
-
-.participation-info li {
-  font-size: 0.8em;
-  padding: 0.5rem 0;
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.participation-info li:before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--color-four);
 }
 
 .learn-more {
@@ -246,14 +220,15 @@ article {
 }
 
 @media (max-width: 768px) {
-  .nft-gallery {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    padding: 1rem;
-    gap: 1rem;
-  }
-
   .nft-description {
     margin: 1rem;
     padding: 1rem;
   }
+}
+
+
+
+footer {
+  margin-top: 2rem;
+  border-top: 1px solid var(--color-four);
 }
