@@ -208,8 +208,8 @@ article {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
-  background: var(--color-two);
-  color: #ffffff;
+  background: var(--color-three);
+  /* color: #ffffff; */
   border-radius: 6px;
   text-decoration: none;
   transition: transform 0.2s ease;
