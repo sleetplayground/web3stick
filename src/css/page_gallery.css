@@ -80,17 +80,26 @@ article {
   }
 
   .search-container {
-    width: 100%;
-    max-width: none;
+    width: 80%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 0;
+    flex: none;
+  }
+
+  .search-input {
+    /* padding: 0.5rem 0.75rem; */
+    font-size: 0.9rem;
   }
 
   .display-options {
-    width: 100%;
-    justify-content: flex-end;
+    width: 90%;
+    justify-content: center;
   }
 
   .items-per-page-select {
-    width: 80px;
+    width: 100%;
+    /* padding: 0.5rem; */
   }
 }
 
